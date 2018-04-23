@@ -1,4 +1,0 @@
-Hello this is a test text file.
-MORE WORDSassas
-Maybe this should be a jave file?
-
