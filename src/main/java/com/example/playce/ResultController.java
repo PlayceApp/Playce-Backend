@@ -29,7 +29,7 @@ public class ResultController {
        } catch (Exception e) {
          System.out.println(e);
        }
-       return new Result(name, 1, 1, "address is not given");
+       return new Result("firestone", 1, 1, "address is not given");
 
     }
 
