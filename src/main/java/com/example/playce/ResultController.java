@@ -31,7 +31,6 @@ public class ResultController {
          System.out.println(e);
          return new Result(e.toString(), 1, 1, "address is not given");
        }
-       return new Result("test didn't work", 1, 1, "address is not given");
 
     }
 
