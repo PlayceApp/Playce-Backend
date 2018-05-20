@@ -20,12 +20,13 @@ public class ResultController {
     @RequestMapping("/testDatabase")
     public Result generateResult() {
        try {
-       Class.forName("com.mysql.jdbc.Driver");                             
-       Connection con = DriverManager.getConnection(                       
-       "us-cdbr-iron-east-05.cleardb.net", "bd9b14204c0c56", "2daf5b5d");                
-       Statement stmt = con.createStatement();
-       ResultSet rs = stmt.executeQuery("select * from playces where name=FirestoneGrill");
-       return new Result(rs.getString(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
+          Class.forName("com.mysql.jdbc.Driver");                             
+          Connection con = DriverManager.getConnection(                       
+          "us-cdbr-iron-east-05.cleardb.net", "bd9b14204c0c56", "2daf5b5d");                
+          Statement stmt = con.createStatement();
+          ResultSet rs = stmt.executeQuery("select * from playces where name=FirestoneGrill");
+          return new Result("firestone grill", 1, 1, "address is not given");
+       ///return new Result(rs.getString(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
        } catch (Exception e) {
          System.out.println(e);
        }
