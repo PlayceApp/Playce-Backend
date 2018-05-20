@@ -30,7 +30,7 @@ public class ResultController {
        } catch (Exception e) {
          System.out.println(e);
        }
-       return new Result("firestone", 1, 1, "address is not given");
+       return new Result(e.toString(), 1, 1, "address is not given");
 
     }
 
