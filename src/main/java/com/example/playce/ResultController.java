@@ -25,11 +25,11 @@ public class ResultController {
        "us-cdbr-iron-east-05.cleardb.net", "bd9b14204c0c56", "2daf5b5d");                
        Statement stmt = con.createStatement();
        ResultSet rs = stmt.executeQuery("select * from playces where name=FirestoneGrill");
+       //return new Result(rs.getString(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
        } catch (Exception e) {
          System.out.println(e);
        }
 
-       return new Result(rs.getString(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
     }
 
     
