@@ -29,8 +29,9 @@ public class ResultController {
        ///return new Result(rs.getString(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
        } catch (Exception e) {
          System.out.println(e);
+         return new Result(e.toString(), 1, 1, "address is not given");
        }
-       return new Result(e.toString(), 1, 1, "address is not given");
+       return new Result("test didn't work", 1, 1, "address is not given");
 
     }
 
