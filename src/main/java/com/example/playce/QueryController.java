@@ -10,7 +10,7 @@ public class QueryController {
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
-
+/*
     @RequestMapping("/query")
     public List<Result> generateResults(@RequestParam(value="name", defaultValue="Firestone Grill") String name) {
        return new Result(name, 1, 1, "address is not given");
@@ -28,6 +28,6 @@ public class QueryController {
        ResultSet rs = stmt.executeQuery();
          */     
 
-    }
+   // }
 
 }

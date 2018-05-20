@@ -11,7 +11,9 @@ import java.sql.*;
             Connection con = DriverManager.getConnection(                       
              "us-cdbr-iron-east-05.cleardb.net", "bd9b14204c0c56", "2daf5b5d");                
             Statement stmt = con.createStatement();                             
-            ResultSet rs = stmt.executeQuery("select address, name from playces");
+            ResultSet rs = stmt.executeQuery("select * from playces where name=FirestoneGrill");
+
+            // select address, name from playces
                                                                                 
             while(rs.next()) {                                                  
                this.city = rs.getString(1);                                     

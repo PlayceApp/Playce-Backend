@@ -18,14 +18,14 @@ public class ResultController {
     }
 
     @RequestMapping("/testDatabase")
-    public void generateDatabase() {
+    public void generateResult() {
 
        Class.forName("com.mysql.jdbc.Driver");                             
        Connection con = DriverManager.getConnection(                       
        "us-cdbr-iron-east-05.cleardb.net", "bd9b14204c0c56", "2daf5b5d");                
-
-       Connection conn = dataSource.getConnection();
-       Statement stmt = conn.createStatement();
-       ResultSet rs = stmt.executeQuery();
+       Statement stmt = con.createStatement();
+       ResultSet rs = stmt.executeQuery("select * from playces where name=FirestoneGrill");
     }
+
+    
 }
