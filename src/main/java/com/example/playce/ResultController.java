@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.sql.*
+import java.sql.*;
 
 @RestController
 public class ResultController {
