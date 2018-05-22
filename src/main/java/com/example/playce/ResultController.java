@@ -56,7 +56,7 @@ public class ResultController {
     }
 
     
-    @RequestMapping("/questionnaire", method = RequestMethod.POST)
+    @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
     public Result generateResultsFromQuestionnaire(@RequestBody Questionnaire questionairreResult) {
       try {
           Class.forName("com.mysql.jdbc.Driver");                             
