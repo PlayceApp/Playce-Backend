@@ -29,14 +29,14 @@ public class ResultController {
           int colCount = rsmd.getColumnCount();
           String secCol = rsmd.getColumnName(6);
           String thirdCol = rsmd.getColumnName(5);
-          return new Result(secCol, colCount, 1, thirdCol);
+          //return new Result(secCol, colCount, 1, thirdCol);
        // 1: id
        // 2: name
        // 3: price
        // 4: result
        // 5: address
-       // 6: 
-       ///return new Result(rs.getString(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
+       // 6: type 
+          return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5));
        } catch (Exception e) {
          System.out.println(e);
          return new Result(e.toString(), 1, 1, "address is not given");
