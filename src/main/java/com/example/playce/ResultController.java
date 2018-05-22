@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class ResultController {
@@ -51,7 +53,7 @@ public class ResultController {
 
     
     @RequestMapping("/questionnaire", method = RequestMethod.POST)
-    public void generateResultsFromQuestionnaire(@RequestBody Questionnaire questionairreResult) {
+    public Result generateResultsFromQuestionnaire(@RequestBody Questionnaire questionairreResult) {
       try {
           Class.forName("com.mysql.jdbc.Driver");                             
           Connection con = DriverManager.getConnection(                       
