@@ -36,7 +36,8 @@ public class ResultController {
        // 4: result
        // 5: address
        // 6: type 
-          return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5));
+        rs.next();  
+        return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5));
        } catch (Exception e) {
          System.out.println(e);
          return new Result(e.toString(), 1, 1, "address is not given");
