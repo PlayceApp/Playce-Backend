@@ -10,6 +10,10 @@ import java.sql.ResultSet;
 import java.sql.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @RestController
 public class ResultController {
@@ -52,7 +56,7 @@ public class ResultController {
     }
 
     
-    @RequestMapping("/questionnaire", method = RequestMethod.POST)
+    @ResponseBody @RequestMapping("/questionnaire", method = RequestMethod.POST)
     public Result generateResultsFromQuestionnaire(@RequestBody Questionnaire questionairreResult) {
       try {
           Class.forName("com.mysql.jdbc.Driver");                             
