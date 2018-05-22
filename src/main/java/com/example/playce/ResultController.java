@@ -27,7 +27,7 @@ public class ResultController {
           ResultSet rs = stmt.executeQuery("select * from playces where name=\"FirestoneGrill\"");
           ResultSetMetaData rsmd = rs.getMetaData();
           int colCount = rsmd.getColumnCount();
-          String firstCol = rsmd.getColumnName(0);
+          String firstCol = rsmd.getColumnName(1);
           return new Result("firestone grill", colCount, 1, firstCol);
        ///return new Result(rs.getString(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
        } catch (Exception e) {
