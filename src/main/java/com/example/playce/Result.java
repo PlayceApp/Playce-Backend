@@ -6,12 +6,14 @@ public class Result {
     private final int price;
     private final double rating;
     private final String address;
+    private final String category;
 
-    public Result(String name, int price, double rating, String address) {
+    public Result(String name, int price, double rating, String address, String category) {
         this.name = name;
         this.price = price;
         this.rating = rating;
         this.address = address;
+        this.category = category;
     }
 
     public String getName() {
@@ -29,4 +31,8 @@ public class Result {
     public String getAddress() {
         return address;
     }
+
+    public String getCategory() {
+        return category;
+    {
 }

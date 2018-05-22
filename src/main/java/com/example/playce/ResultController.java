@@ -14,10 +14,10 @@ public class ResultController {
     
     @RequestMapping("/result")
     public Result generateResult(@RequestParam(value="name", defaultValue="Firestone Grill") String name) {
-       return new Result(name, 1, 1, "address is not given");
+       return new Result(name, 1, 1, "address is not given", "no category");
     }
 
-    @RequestMapping("/testDatabase")
+    @RequestMapping("/getPlayceResult")
     public Result generatePlayceResult(@RequestParam(value="name", defaultValue = "Firestone Grill") String playceName) {
        try {
           Class.forName("com.mysql.jdbc.Driver");                             
@@ -27,7 +27,7 @@ public class ResultController {
           String query = "select * from playces where name=\"" + playceName + "\"";
           ResultSet rs = stmt.executeQuery(query);
           rs.next();  
-	  return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(6));
+	  return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
 /*
 // used in retrieving column names
           ResultSetMetaData rsmd = rs.getMetaData();
@@ -44,7 +44,7 @@ public class ResultController {
 */
        } catch (Exception e) {
          System.out.println(e);
-         return new Result(e.toString(), 0, 0, "address is not given");
+         return new Result(e.toString(), 0, 0, "address is not given", "no type given");
        }
 
     }
