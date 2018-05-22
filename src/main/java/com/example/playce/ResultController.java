@@ -27,12 +27,12 @@ public class ResultController {
           ResultSet rs = stmt.executeQuery("select * from playces where name=\"FirestoneGrill\"");
           ResultSetMetaData rsmd = rs.getMetaData();
           int colCount = rsmd.getColumnCount();
-          String secCol = rsmd.getColumnName(2);
-          String thirdCol = rsmd.getColumnName(3);
+          String secCol = rsmd.getColumnName(4);
+          String thirdCol = rsmd.getColumnName(5);
           return new Result(secCol, colCount, 1, thirdCol);
        // 1: id
-       // 2:
-       // 3:
+       // 2: name
+       // 3: price
        // 4:
        // 5:
        // 6: 
