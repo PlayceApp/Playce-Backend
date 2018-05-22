@@ -27,7 +27,7 @@ public class ResultController {
           String query = "select * from playces where name=\"" + playceName + "\"";
           ResultSet rs = stmt.executeQuery(query);
           ResultSetMetaData rsmd = rs.getMetaData();
-          int type = rsmd.getColumnType(6);
+          int type = rsmd.getColumnType(3);
           rs.next();  
 	  //return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5));
           return new Result(rs.getString(2), rs.getInt(type), rs.getDouble(4), rs.getString(5));
