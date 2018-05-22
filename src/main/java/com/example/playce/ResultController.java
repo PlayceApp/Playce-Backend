@@ -47,7 +47,7 @@ public class ResultController {
 */
        } catch (Exception e) {
          System.out.println(e);
-         return new Result("Cannot find playce name in database, 0, 0, "address is not given");
+         return new Result("Cannot find playce name in database", 0, 0, "address is not given");
        }
 
     }
