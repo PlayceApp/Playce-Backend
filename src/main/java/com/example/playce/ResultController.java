@@ -18,7 +18,7 @@ public class ResultController {
     }
 
     @RequestMapping("/testDatabase")
-    public Result generateResult(@RequestParam(value="name", defaultValue = "Firestone Grill") String playceName) {
+    public Result generatePlayceResult(@RequestParam(value="name", defaultValue = "Firestone Grill") String playceName) {
        try {
           Class.forName("com.mysql.jdbc.Driver");                             
           Connection con = DriverManager.getConnection(                       
