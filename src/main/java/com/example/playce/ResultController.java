@@ -25,7 +25,10 @@ public class ResultController {
           "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");                
           Statement stmt = con.createStatement();
           ResultSet rs = stmt.executeQuery("select * from playces where name=\"FirestoneGrill\"");
-          return new Result("firestone grill", 1, 1, "address is not given");
+          ResultSetMetaData rsmd = rs.getMetaData();
+          int colCount = rsmd.getColumnCount();
+          String firstCol = rsmd.getColumnName(0);
+          return new Result("firestone grill", colCount, 1, firstCol);
        ///return new Result(rs.getString(1), rs.getInt(2), rs.getDouble(3), rs.getString(4));
        } catch (Exception e) {
          System.out.println(e);
