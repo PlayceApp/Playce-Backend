@@ -20,7 +20,7 @@ public class ResultController {
     @RequestMapping("/testDatabase")
     public Result generateResult() {
        try {
-          //Class.forName("com.mysql.jdbc.Driver");                             
+          Class.forName("com.mysql.jdbc.Driver");                             
           Connection con = DriverManager.getConnection(                       
           "us-cdbr-iron-east-05.cleardb.net", "bd9b14204c0c56", "2daf5b5d");                
           Statement stmt = con.createStatement();
