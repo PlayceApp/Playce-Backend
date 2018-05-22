@@ -18,13 +18,17 @@ public class ResultController {
     }
 
     @RequestMapping("/testDatabase")
-    public Result generateResult() {
+    public Result generateResult(@RequestParam(value="name", defaultValue = "Firestone Grill") String playceName) {
        try {
           Class.forName("com.mysql.jdbc.Driver");                             
           Connection con = DriverManager.getConnection(                       
           "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");                
           Statement stmt = con.createStatement();
-          ResultSet rs = stmt.executeQuery("select * from playces where name=\"Firestone Grill\"");
+          ResultSet rs = stmt.executeQuery("select * from playces where name= '/"playceName/"'");
+          rs.next();  
+          return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5));
+/*
+// used in retrieving column names
           ResultSetMetaData rsmd = rs.getMetaData();
           int colCount = rsmd.getColumnCount();
           String secCol = rsmd.getColumnName(6);
@@ -36,8 +40,7 @@ public class ResultController {
        // 4: result
        // 5: address
        // 6: type 
-        rs.next();  
-        return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5));
+*/
        } catch (Exception e) {
          System.out.println(e);
          return new Result(e.toString(), 1, 1, "address is not given");
