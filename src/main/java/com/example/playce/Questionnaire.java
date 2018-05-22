@@ -4,11 +4,14 @@ public class Questionnaire {
     
     private final int price;
     private final String category;
+    private final double rating;
 //    private final double[] userCoordinates;
 
-    public Questionnaire(int price, String category) {
+    public Questionnaire(int price, String category, double rating) {
         this.price = price;
         this.category = category;
+        this.rating = rating;
+
     //    this.userCoordinates = userCoordinates;
     }
 
@@ -23,5 +26,9 @@ public class Questionnaire {
 */
     public String getCategory() {
         return category;
+    }
+
+    public double getRating() {
+        return rating;
     }
 }

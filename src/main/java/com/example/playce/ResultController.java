@@ -57,13 +57,13 @@ public class ResultController {
 
     
     @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
-    public Result generateResultsFromQuestionnaire(@RequestBody Questionnaire questionairreResult) {
+    public Result generateResultsFromQuestionnaire(@RequestBody Questionnaire questionnaireResult) {
       try {
           Class.forName("com.mysql.jdbc.Driver");                             
           Connection con = DriverManager.getConnection(                       
           "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");                
           Statement stmt = con.createStatement();
-          String query = "select * from playces where price=\"" + questionairreResult.getPrice() + "\" and type=\"" + questionairreResult.getCategory() + "\"";
+          String query = "select * from playces where price=\"" + questionnaireResult.getPrice() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and result>=\"" + questionnaire.getRating() + "\"";
           ResultSet rs = stmt.executeQuery(query);
           rs.next();  
 	  return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
