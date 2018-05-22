@@ -24,7 +24,7 @@ public class ResultController {
           Connection con = DriverManager.getConnection(                       
           "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");                
           Statement stmt = con.createStatement();
-          ResultSet rs = stmt.executeQuery("select * from playces where name=\"FirestoneGrill\"");
+          ResultSet rs = stmt.executeQuery("select * from playces where name=\"Firestone Grill\"");
           ResultSetMetaData rsmd = rs.getMetaData();
           int colCount = rsmd.getColumnCount();
           String secCol = rsmd.getColumnName(6);
