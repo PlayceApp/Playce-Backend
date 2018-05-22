@@ -34,5 +34,5 @@ public class Result {
 
     public String getCategory() {
         return category;
-    {
+    }
 }
