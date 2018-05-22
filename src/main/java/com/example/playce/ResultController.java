@@ -26,9 +26,9 @@ public class ResultController {
           Statement stmt = con.createStatement();
           String query = "select * from playces where name=\"" + playceName + "\"";
           ResultSet rs = stmt.executeQuery(query);
-          rs.next();  
           ResultSetMetaData rsmd = rs.getMetaData();
           int type = rsmd.getColumnType(6);
+          rs.next();  
 	  //return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5));
           return new Result(rs.getString(2), rs.getInt(type), rs.getDouble(4), rs.getString(5));
 /*
@@ -47,7 +47,7 @@ public class ResultController {
 */
        } catch (Exception e) {
          System.out.println(e);
-         return new Result("Cannot find playce name in database", 0, 0, "address is not given");
+         return new Result(e.toString(), 0, 0, "address is not given");
        }
 
     }
