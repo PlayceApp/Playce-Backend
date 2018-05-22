@@ -22,7 +22,7 @@ public class ResultController {
        try {
           Class.forName("com.mysql.jdbc.Driver");                             
           Connection con = DriverManager.getConnection(                       
-          "jdbc:mysql:us-cdbr-iron-east-05.cleardb.net", "bd9b14204c0c56", "2daf5b5d");                
+          "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net", "bd9b14204c0c56", "2daf5b5d");                
           Statement stmt = con.createStatement();
           ResultSet rs = stmt.executeQuery("select * from playces where name=FirestoneGrill");
           return new Result("firestone grill", 1, 1, "address is not given");
