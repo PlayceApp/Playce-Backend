@@ -15,7 +15,7 @@ public class MultipleResults {
     @Builder
     public MultipleResults(Result firstResult, Result secondResult, Result thirdResult, Result fourthResult, Result fifthResult) {
         this(firstResult, 
-            (Optional<Result>) Optional.ofNullable(secondResult),
+            (Result) Optional.ofNullable(secondResult),
             (Optional<Result>) Optional.ofNullable(thirdResult),
             (Optional<Result>) Optional.ofNullable(fourthResult),
             (Optional<Result>) Optional.ofNullable(fifthResult));
