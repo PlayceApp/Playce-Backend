@@ -87,6 +87,20 @@ public class ResultController {
              }
              count++;             
           }
+
+          if (count <= 4) {
+             multR.fifthResult(Optional.of(new Result("no more options", 0, 0, "sorry", "sorry")));
+          }
+          if (count <= 3) {
+             multR.fourthResult(Optional.of(new Result("no more options", 0, 0, "sorry", "sorry")));
+          }
+          if (count <= 2) {
+             multR.thirdResult(Optional.of(new Result("no more options", 0, 0, "sorry", "sorry")));
+          }
+
+          if (count == 1) {
+             multR.secondResult(Optional.of(new Result("no more options", 0, 0, "sorry", "sorry")));
+          }
  
 	  return multR.build();
        } catch (Exception e) {
