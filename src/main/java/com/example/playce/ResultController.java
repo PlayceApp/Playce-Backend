@@ -57,7 +57,7 @@ public class ResultController {
 
     
     @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
-    public MultipleResults generateResultsFromQuestionnaire(@RequestBody Questionnaire questionnaireResult) {
+    public Result generateResultsFromQuestionnaire(@RequestBody Questionnaire questionnaireResult) {
       try {
           Class.forName("com.mysql.jdbc.Driver");                             
           Connection con = DriverManager.getConnection(                       
@@ -66,10 +66,10 @@ public class ResultController {
           String query = "select * from playces where price<=\"" + questionnaireResult.getPrice() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
           ResultSet rs = stmt.executeQuery(query);
 
-          int count = 0;
-          while (rs.next() && count <= 5) {
+    //      int count = 0;
+  //        while (rs.next() && count <= 5) {
              rs.next(); 
-          } 
+//          } 
 	  return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
        } catch (Exception e) {
          return new Result(e.toString(), 0, 0, "address is not given", "no type given");
