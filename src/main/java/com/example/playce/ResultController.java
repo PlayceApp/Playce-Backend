@@ -66,7 +66,7 @@ public class ResultController {
           String query = "select * from playces where price<=\"" + questionnaireResult.getPrice() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
           ResultSet rs = stmt.executeQuery(query);
 
-          multR = MultipleResults.builder();
+          MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
           int count = 1;
           while (rs.next() && count <= 5) {
              rs.next();
