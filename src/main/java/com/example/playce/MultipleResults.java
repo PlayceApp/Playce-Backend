@@ -7,14 +7,14 @@ import lombok.Builder;
 public class MultipleResults {
 
     private final Result firstResult;
-    private final Optional<Result> secondResult;
-    private final Optional<Result> thirdResult;
-    private final Optional<Result> fourthResult;
-    private final Optional<Result> fifthResult;
+    private final Optional<T> secondResult;
+    private final Optional<T> thirdResult;
+    private final Optional<T> fourthResult;
+    private final Optional<T> fifthResult;
 
     @Builder
     public MultipleResults(Result firstResult, Result secondResult, Result thirdResult, Result fourthResult, Result fifthResult) {
-        this(firstResult, Optional.of(secondResult), Optional.of(thirdResult), Optional.of(fourthResult), Optional.of(fifthResult));
+        this(firstResult, Optional.ofNullable(secondResult), Optional.ofNullable(thirdResult), Optional.ofNullable(fourthResult), Optional.ofNullable(fifthResult));
     }
 
     public Result getFirstResult() {
