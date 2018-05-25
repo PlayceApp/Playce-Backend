@@ -1,8 +1,11 @@
 package com.example.playce;
 
 import java.util.Optional;
+import lombok.Builder;
+import lombok.AllArgsConstructor;
 
 // goes from shortest to longest distance
+@AllArgsConstructor
 public class MultipleResults {
 
     private final Result firstResult;
@@ -11,12 +14,9 @@ public class MultipleResults {
     private final Optional<Result> fourthResult;
     private final Optional<Result> fifthResult;
 
+    @Builder
     public MultipleResults(Result firstResult, Result secondResult, Result thirdResult, Result fourthResult, Result fifthResult) {
-        this.firstResult = firstResult;
-        this.secondResult = Optional.of(secondResult);
-        this.thirdResult = Optional.of(thirdResult);
-        this.fourthResult = Optional.of(fourthResult);
-        this.fifthResult = Optional.of(fifthResult);
+        this(firstResult, Optional.ofNullable(secondResult), Optional.ofNullable(thirdResult), Optional.ofNullable(fourthResult), Optional.ofNullable(fifthResult));
     }
 
     public Result getFirstResult() {
@@ -38,4 +38,5 @@ public class MultipleResults {
     public Result getFifthResult() {
         return fifthResult.get();
     }
+
 }
