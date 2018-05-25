@@ -12,17 +12,13 @@ public class MultipleResults {
     private final Optional<Result> fourthResult;
     private final Optional<Result> fifthResult;
 
-    public MultipleResults(Result firstResult, Optional<Result> secondResult, Optional<Result> thirdResult, Optional<Result> fourthResult) {
-       this.firstResult = firstResult;
-       this.secondResult = secondResult;
-       this.thirdResult = thirdResult;
-       this.fourthResult = fourthResult;
-       this.fifthResult = Optional.empty();
-    }
-
     @Builder
     public MultipleResults(Result firstResult, Result secondResult, Result thirdResult, Result fourthResult, Result fifthResult) {
-        this(firstResult, Optional.ofNullable(secondResult), Optional.ofNullable(thirdResult), Optional.ofNullable(fourthResult), Optional.ofNullable(fifthResult));
+        this(firstResult, 
+            (Optional<Result>) Optional.ofNullable(secondResult),
+            (Optional<Result>) Optional.ofNullable(thirdResult),
+            (Optional<Result>) Optional.ofNullable(fourthResult),
+            (Optional<Result>) Optional.ofNullable(fifthResult));
     }
 
     public Result getFirstResult() {
