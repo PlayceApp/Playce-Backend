@@ -74,16 +74,16 @@ public class ResultController {
 	        multR.firstResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
              } 
              else if (count == 2) {
-	        multR.secondResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
+	        multR.secondResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
              }             
              else if (count == 3) {
-	        multR.thirdResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
+	        multR.thirdResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
              }             
              else if (count == 4) {
-	        multR.fourthResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
+	        multR.fourthResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
              }             
              else if (count == 5) {
-	        multR.fifthResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
+	        multR.fifthResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
              }             
           }
  
