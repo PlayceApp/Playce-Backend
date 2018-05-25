@@ -84,7 +84,8 @@ public class ResultController {
              }             
              else if (count == 5) {
 	        multR.fifthResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
-             }             
+             }
+             count++;             
           }
  
 	  return multR.build();
