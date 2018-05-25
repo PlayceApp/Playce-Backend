@@ -2,10 +2,8 @@ package com.example.playce;
 
 import java.util.Optional;
 import lombok.Builder;
-import lombok.AllArgsConstructor;
 
 // goes from shortest to longest distance
-@AllArgsConstructor
 public class MultipleResults {
 
     private final Result firstResult;

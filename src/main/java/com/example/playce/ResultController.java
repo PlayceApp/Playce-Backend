@@ -66,31 +66,28 @@ public class ResultController {
           String query = "select * from playces where price<=\"" + questionnaireResult.getPrice() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
           ResultSet rs = stmt.executeQuery(query);
 
-          Result res1;
-          Result res2;
-          Result res3;
-          Result res4;
-          Result res5;
+          MultipleResultsBuilder multR = MultipleResults.builder();
           int count = 1;
           while (rs.next() && count <= 5) {
              rs.next();
              if (count == 1) {
-	        res1 = new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+	        multR.firstResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
              } 
              else if (count == 2) {
-	        res2 = new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+	        multR.secondResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
              }             
              else if (count == 3) {
-	        res3 = new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+	        multR.thirdResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
              }             
              else if (count == 4) {
-	        res4 = new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+	        multR.fourthResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
              }             
              else if (count == 5) {
-	        res5 = new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+	        multR.fifthResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
              }             
-          } 
-	  return new MultipleResults(res1, res2, res3, res4, res5);
+          }
+ 
+	  return multR.build();
        } catch (Exception e) {
          return new MultipleResults(new Result(e.toString(), 0, 0, "address is not given", "no type given"), null, null, null, null);
        }
