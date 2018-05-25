@@ -57,7 +57,7 @@ public class ResultController {
 
     
     @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
-    public Result generateResultsFromQuestionnaire(@RequestBody Questionnaire questionnaireResult) {
+    public MultipleResults generateResultsFromQuestionnaire(@RequestBody Questionnaire questionnaireResult) {
       try {
           Class.forName("com.mysql.jdbc.Driver");                             
           Connection con = DriverManager.getConnection(                       
@@ -66,13 +66,33 @@ public class ResultController {
           String query = "select * from playces where price<=\"" + questionnaireResult.getPrice() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
           ResultSet rs = stmt.executeQuery(query);
 
-    //      int count = 0;
-  //        while (rs.next() && count <= 5) {
-             rs.next(); 
-//          } 
-	  return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+          Result res1;
+          Result res2;
+          Result res3;
+          Result res4;
+          Result res5;
+          int count = 1;
+          while (rs.next() && count <= 5) {
+             rs.next();
+             if (count == 1) {
+	        res1 = new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+             } 
+             else if (count == 2) {
+	        res2 = new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+             }             
+             else if (count == 3) {
+	        res3 = new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+             }             
+             else if (count == 4) {
+	        res4 = new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+             }             
+             else if (count == 5) {
+	        res5 = new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+             }             
+          } 
+	  return new MultipleResults(res1, res2, res3, res4, res5);
        } catch (Exception e) {
-         return new Result(e.toString(), 0, 0, "address is not given", "no type given");
+         return new MultipleResults(new Result(e.toString(), 0, 0, "address is not given", "no type given"), null, null, null, null);
        }
     }
 }
