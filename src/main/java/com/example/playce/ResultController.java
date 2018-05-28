@@ -36,11 +36,12 @@ public class ResultController {
           ResultSet rs = stmt.executeQuery(query);
           rs.next();  
 	  return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+
 /*
 // used in retrieving column names
           ResultSetMetaData rsmd = rs.getMetaData();
           int colCount = rsmd.getColumnCount();
-          String secCol = rsmd.getColumnName(6);
+          String secCol = rsmd.getColumnName(7);
           String thirdCol = rsmd.getColumnName(5);
           //return new Result(secCol, colCount, 1, thirdCol);
        // 1: id
@@ -49,6 +50,8 @@ public class ResultController {
        // 4: rating
        // 5: address
        // 6: type 
+
+         return new Result("getting col count", colCount, 0, , "no type given");
 */
        } catch (Exception e) {
          System.out.println(e);
@@ -80,7 +83,7 @@ public class ResultController {
              price = 4;
           }
 
-          String query = "select * from playces where price<=\"" + price + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+          String query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaireResult.getCuisine() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
           ResultSet rs = stmt.executeQuery(query);
 
           MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
