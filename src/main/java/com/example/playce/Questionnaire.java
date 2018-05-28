@@ -2,12 +2,12 @@ package com.example.playce;
 
 public class Questionnaire {
     
-    private final int price;
+    private final String price;
     private final String category;
     private final double rating;
 //    private final double[] userCoordinates;
 
-    public Questionnaire(int price, String category, double rating) {
+    public Questionnaire(String price, String category, double rating) {
         this.price = price;
         this.category = category;
         this.rating = rating;
@@ -15,7 +15,7 @@ public class Questionnaire {
     //    this.userCoordinates = userCoordinates;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 

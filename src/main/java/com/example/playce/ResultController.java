@@ -63,7 +63,22 @@ public class ResultController {
           Connection con = DriverManager.getConnection(                       
           "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");                
           Statement stmt = con.createStatement();
-          String query = "select * from playces where price<=\"" + questionnaireResult.getPrice() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+          int price = 0;
+          String priceQuest = questionnaireResult.getPrice();
+          if (priceQuest.equals("$")) {
+             price = 1;
+          }
+          else if (priceQuest.equals("$$")) {
+             price = 2;
+          }
+          else if (priceQuest.equals("$$$")) {
+             price = 3;
+          }
+          else {
+             price = 4;
+          }
+
+          String query = "select * from playces where price<=\"" + price + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
           ResultSet rs = stmt.executeQuery(query);
 
           MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
