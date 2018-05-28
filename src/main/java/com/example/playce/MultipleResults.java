@@ -7,27 +7,19 @@ import lombok.Builder;
 @Builder
 public class MultipleResults {
 
-    private final Result firstResult;
+    private final Result[] results;
 /*
-    private final Optional<Result> secondResult;
-    private final Optional<Result> thirdResult;
-    private final Optional<Result> fourthResult;
- */ @Builder.Default private final Optional<Result> secondResult = Optional.empty();
+    private final Result firstResult;
+    @Builder.Default private final Optional<Result> secondResult = Optional.empty();
     @Builder.Default private final Optional<Result> thirdResult = Optional.empty();
     @Builder.Default private final Optional<Result> fourthResult = Optional.empty();
  
     @Builder.Default private final Optional<Result> fifthResult = Optional.empty();
-/*
-    @Builder
-    public MultipleResults(Result firstResult, Result secondResult, Result thirdResult, Result fourthResult, Result fifthResult) {
-        this(firstResult, 
-            (Optional<Result>) Optional.ofNullable(secondResult),
-            (Optional<Result>) Optional.ofNullable(thirdResult),
-            (Optional<Result>) Optional.ofNullable(fourthResult),
-            (Optional<Result>) Optional.ofNullable(fifthResult));
-    }
 */
-
+    public Result[] getResults() {
+       return results;
+    }
+/*
     public Result getFirstResult() {
         return firstResult;
     }
@@ -47,5 +39,5 @@ public class MultipleResults {
     public Result getFifthResult() {
         return fifthResult.get();
     }
-
+*/
 }

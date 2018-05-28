@@ -84,14 +84,28 @@ public class ResultController {
           ResultSet rs = stmt.executeQuery(query);
 
           MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
-          int count = 1;
-          while (rs.next() && count <= 5) {
-             rs.next();
+          int count = 0;
+          Result[] r = new Result[5];
+          while (rs.next() && count < 5) {
+	     r[count] = (new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
+             count++;             
+          }
+ 
+	  return multR.results(r).build();
+       } catch (Exception e) {
+          Result[] r = new Result[1];
+          r[0] = new Result(e.toString(), 0, 0, "address is not given", "no type given");
+         return new MultipleResults(r);
+       }
+    }
+}
+
+/*
+
              if (count == 1) {
-	        multR.firstResult(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
              } 
              else if (count == 2) {
-	        multR.secondResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
+	        r[(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
              }             
              else if (count == 3) {
 	        multR.thirdResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
@@ -102,8 +116,6 @@ public class ResultController {
              else if (count == 5) {
 	        multR.fifthResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
              }
-             count++;             
-          }
 
           if (count <= 4) {
              multR.fifthResult(Optional.of(new Result("no more options", 0, 0, "sorry", "sorry")));
@@ -118,10 +130,4 @@ public class ResultController {
           if (count == 1) {
              multR.secondResult(Optional.of(new Result("no more options", 0, 0, "sorry", "sorry")));
           }
- 
-	  return multR.build();
-       } catch (Exception e) {
-         return new MultipleResults(new Result(e.toString(), 0, 0, "address is not given", "no type given"), null, null, null, null);
-       }
-    }
-}
+*/
