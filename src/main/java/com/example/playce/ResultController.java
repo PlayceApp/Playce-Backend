@@ -83,7 +83,7 @@ public class ResultController {
              price = 4;
           }
 
-          if (questionnaireResult.getCategory().equals("restaurant") {
+          if (questionnaireResult.getCategory().equals("restaurant")) {
              if (questionnaireResult.isOver21()) {   
                 String query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaireResult.getCuisine() + "\" and age<=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
              }
@@ -91,7 +91,7 @@ public class ResultController {
                 String query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaireResult.getCuisine() + "\" and age=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
              }
           }
-          else if (questionnaireResult.getCategory().equals("shopping") {
+          else if (questionnaireResult.getCategory().equals("shopping")) {
                 String query = "select * from playces where price<=\"" + price + "\" and age=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
           }
           else {
