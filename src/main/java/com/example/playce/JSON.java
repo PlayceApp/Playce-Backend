@@ -4,7 +4,7 @@ public class JSON {
 
     private String content;
 
-    public Greeting(String content) {
+    public JSON(String content) {
         this.content = content;
     }
 
