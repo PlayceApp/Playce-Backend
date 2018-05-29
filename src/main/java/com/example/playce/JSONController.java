@@ -13,17 +13,17 @@ public class JSONController {
     @RequestMapping("/recreation")
     @ResponseBody
     public String json() {
-        //String contents = new String(Files.readAllBytes(Paths.get("/vast-wave-50282/src/main/resources/ValidatedQuestionnaires/recreation.json")));
-        File[] paths;
-        String s = "";
-        File f = new File("/app/src/main/resources/ValidatedQuestionnaires");
+        String contents = new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/recreation.json")));
+        // File[] paths;
+        // String s = "";
+        // File f = new File("/app/src/main/resources/ValidatedQuestionnaires/recreation.json");
 
-        paths = f.listFiles();
+        // paths = f.listFiles();
          
-        for(File path:paths) {     
-            s = s + "\n" + path;
-        }
-        return s;
+        // for(File path:paths) {     
+        //     s = s + "\n" + path;
+        // }
+        return contents;
     }
 }
 
