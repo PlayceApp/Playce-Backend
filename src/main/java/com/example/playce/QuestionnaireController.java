@@ -8,13 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class QuestionnaireController {
 
-    @RequestMapping(
-      value = "/recreation", 
-      method = RequestMethod.GET, 
-      produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @RequestMapping("/recreation")
+    public String recreation(@RequestParam(value="name", defaultValue="World") String name) {
+        String contents = new String(Files.readAllBytes(Paths.get("../resources/ValidatedQuestionnaires/recreation.json")));
 
-    String getTest() {
-        return "./ValidatedQuestionnaires/shopping.json";
+        return contents;
     }
 }

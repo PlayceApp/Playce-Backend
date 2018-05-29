@@ -60,30 +60,30 @@
          "answers": [
             {
                "answer": "1",
-               "next": "21"
+               "next": "is21"
             },
             {
                "answer": "2",
-               "next": "21"
+               "next": "is21"
             },
             {
                "answer": "3",
-               "next": "21"
+               "next": "is21"
             },
             {
                "answer": "4",
-               "next": "21"
+               "next": "is21"
             },
             {
                "answer": "5+",
-               "next": "21"
+               "next": "is21"
             }
          ],
          "view": "MultiChoiceView"
       },
-      "21": {
+      "is21": {
          "question": "Is everyone 21 years old?",
-         "shorthand": "21",
+         "shorthand": "is21",
          "answers": [
             {
                "answer": "Yes",
