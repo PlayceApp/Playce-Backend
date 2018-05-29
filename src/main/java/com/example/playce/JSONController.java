@@ -16,7 +16,7 @@ public class JSONController {
         //String contents = new String(Files.readAllBytes(Paths.get("/vast-wave-50282/src/main/resources/ValidatedQuestionnaires/recreation.json")));
         File[] paths;
         String s = "";
-        File f = new File("/src/main/java/resources/ValidatedQuestionnaires");
+        File f = new File("/app/src/main/java/resources/ValidatedQuestionnaires");
 
         paths = f.listFiles();
          
