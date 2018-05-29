@@ -10,8 +10,8 @@ public class QuestionnaireController {
 
     @RequestMapping("/recreation")
     public String recreation(@RequestParam(value="name", defaultValue="World") String name) {
-        String contents = new String(Files.readAllBytes(Paths.get("/src/main/resources/ValidatedQuestionnaires/recreation.json")));
+        //String contents = new String(Files.readAllBytes(Paths.get("/src/main/resources/ValidatedQuestionnaires/recreation.json")));
 
-        return contents;
+        return "hi";
     }
 }
