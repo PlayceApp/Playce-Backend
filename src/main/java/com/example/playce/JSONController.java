@@ -14,7 +14,7 @@ public class JSONController {
 
     @RequestMapping("/recreation")
     @ResponseBody
-    public String json() {
+    public String json() throws IOException {
         String contents = new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/recreation.json")));
         // File[] paths;
         // String s = "";
