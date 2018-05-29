@@ -6,12 +6,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class QuestionnaireController {
+public class JSONController {
 
     @RequestMapping("/recreation")
-    public String recreation(@RequestParam(value="name", defaultValue="World") String name) {
-        //String contents = new String(Files.readAllBytes(Paths.get("/src/main/resources/ValidatedQuestionnaires/recreation.json")));
-
-        return "hi";
+    public JSON json(@RequestParam(value="name", defaultValue="World") String name) {
+        return new JSON("hi");
     }
 }
+
