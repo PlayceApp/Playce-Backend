@@ -12,7 +12,8 @@ public class JSONController {
     @RequestMapping("/recreation")
     @ResponseBody
     public String json() {
-        return "hi";
+        String contents = new String(Files.readAllBytes(Paths.get("/src/main/resources/ValidatedQuestionnaires/recreation.json")));
+        return contents;
     }
 }
 
