@@ -8,12 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
 
-// import org.springframework.core.io.*;
-// import java.io.File;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.RequestMethod;
-// import org.springframework.web.bind.annotation.RequestParam;
-
 @RestController
 public class JSONController {
 
@@ -24,12 +18,19 @@ public class JSONController {
         return contents;
     }
 
-    // @RequestMapping(value = "/app/src/main/resources/ValidatedQuestionnaires/recreation.json", method = RequestMethod.GET)
-    // @ResponseBody 
-    // public FileSystemResource getFile(@PathVariable("recreation.json") String fileName) {
-    //     File a = new File("/app/src/main/resources/ValidatedQuestionnaires/recreation.json");
-    //     return new FileSystemResource(a); 
-    // }
+    @RequestMapping("/restaurant")
+    @ResponseBody
+    public String json() throws IOException {
+        String contents = new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/restaurant.json")));
+        return contents;
+    }
+
+    @RequestMapping("/shopping")
+    @ResponseBody
+    public String json() throws IOException {
+        String contents = new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/shopping.json")));
+        return contents;
+    }
 }
 
 
