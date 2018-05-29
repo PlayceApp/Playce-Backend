@@ -1,6 +1,6 @@
 package com.example.playce;
 
-public class Greeting {
+public class JSON {
 
     private String content;
 
