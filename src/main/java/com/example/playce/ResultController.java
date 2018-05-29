@@ -83,7 +83,7 @@ public class ResultController {
              price = 4;
           }
 
-          String query = ""
+          String query = "";
           if (questionnaireResult.getCategory().equals("restaurant")) {
              if (questionnaireResult.isOver21()) {   
                 query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaireResult.getCuisine() + "\" and age<=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
