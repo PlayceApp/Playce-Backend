@@ -83,7 +83,21 @@ public class ResultController {
              price = 4;
           }
 
-          String query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaireResult.getCuisine() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+          if (questionnaireResult.getCategory().equals("restaurant") {
+             if (questionnaireResult.isOver21()) {   
+                String query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaireResult.getCuisine() + "\" and age<=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+             }
+             else {
+                String query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaireResult.getCuisine() + "\" and age=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+             }
+          }
+          else if (questionnaireResult.getCategory().equals("shopping") {
+                String query = "select * from playces where price<=\"" + price + "\" and age=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+          }
+          else {
+                String query = "select * from playces where price<=\"" + price + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+          }
+          
           ResultSet rs = stmt.executeQuery(query);
 
           MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
@@ -102,35 +116,3 @@ public class ResultController {
        }
     }
 }
-
-/*
-
-             if (count == 1) {
-             } 
-             else if (count == 2) {
-	        r[(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
-             }             
-             else if (count == 3) {
-	        multR.thirdResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
-             }             
-             else if (count == 4) {
-	        multR.fourthResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
-             }             
-             else if (count == 5) {
-	        multR.fifthResult(Optional.of(new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6))));
-             }
-
-          if (count <= 4) {
-             multR.fifthResult(Optional.of(new Result("no more options", 0, 0, "sorry", "sorry")));
-          }
-          if (count <= 3) {
-             multR.fourthResult(Optional.of(new Result("no more options", 0, 0, "sorry", "sorry")));
-          }
-          if (count <= 2) {
-             multR.thirdResult(Optional.of(new Result("no more options", 0, 0, "sorry", "sorry")));
-          }
-
-          if (count == 1) {
-             multR.secondResult(Optional.of(new Result("no more options", 0, 0, "sorry", "sorry")));
-          }
-*/
