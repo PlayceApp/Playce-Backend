@@ -13,7 +13,7 @@ public class JSONController {
     @ResponseBody
     public String json() {
         //String contents = new String(Files.readAllBytes(Paths.get("/vast-wave-50282/src/main/resources/ValidatedQuestionnaires/recreation.json")));
-        return System.getProperty("user.dir"));
+        return System.getProperty("user.dir");
     }
 }
 
