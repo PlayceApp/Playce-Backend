@@ -16,12 +16,12 @@ public class JSONController {
         //String contents = new String(Files.readAllBytes(Paths.get("/vast-wave-50282/src/main/resources/ValidatedQuestionnaires/recreation.json")));
         File[] paths;
         String s = "";
-        File f = new File("/app");
+        File f = new File("/src/main/java/resources/ValidatedQuestionnaires");
 
         paths = f.listFiles();
          
         for(File path:paths) {     
-            s = s + path;
+            s = s + "\n" + path;
         }
         return s;
     }
