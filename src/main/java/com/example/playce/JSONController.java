@@ -16,19 +16,19 @@ import java.io.File;
 @RestController
 public class JSONController {
 
-    // @RequestMapping("/recreation")
-    // @ResponseBody
-    // public String json() throws IOException {
-    //     String contents = new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/recreation.json")));
-    //     return contents;
-    // }
-
-    @RequestMapping(value = "/app/src/main/resources/ValidatedQuestionnaires/recreation.json", method = RequestMethod.GET)
-    @ResponseBody 
-    public FileSystemResource getFile(@PathVariable("recreation.json") String fileName) {
-        File a = new File("/app/src/main/resources/ValidatedQuestionnaires/recreation.json");
-        return new FileSystemResource(a); 
+    @RequestMapping("/recreation")
+    @ResponseBody
+    public String json() throws IOException {
+        String contents = new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/recreation.json")));
+        return contents;
     }
+
+    // @RequestMapping(value = "/app/src/main/resources/ValidatedQuestionnaires/recreation.json", method = RequestMethod.GET)
+    // @ResponseBody 
+    // public FileSystemResource getFile(@PathVariable("recreation.json") String fileName) {
+    //     File a = new File("/app/src/main/resources/ValidatedQuestionnaires/recreation.json");
+    //     return new FileSystemResource(a); 
+    // }
 }
 
 
