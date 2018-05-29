@@ -12,7 +12,7 @@ public class JSONController {
     @RequestMapping("/recreation")
     @ResponseBody
     public String json() {
-        String contents = new String(Files.readAllBytes(Paths.get("/src/main/resources/ValidatedQuestionnaires/recreation.json")));
+        String contents = new String(Files.readAllBytes(Paths.get("/vast-wave-50282/src/main/resources/ValidatedQuestionnaires/recreation.json")));
         return contents;
     }
 }
