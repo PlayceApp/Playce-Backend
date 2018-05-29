@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class JSONController {
 
     @RequestMapping("/recreation")
-    public JSON json(@RequestParam(value="name", defaultValue="World") String name) {
-        return new JSON("hi");
+    @ResponseBody
+    public String json() {
+        return "hi";
     }
 }
 
