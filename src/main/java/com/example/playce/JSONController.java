@@ -26,7 +26,8 @@ public class JSONController {
     @RequestMapping(value = "/app/src/main/resources/ValidatedQuestionnaires/recreation.json", method = RequestMethod.GET)
     @ResponseBody 
     public FileSystemResource getFile(@PathVariable("recreation.json") String fileName) {
-        return new FileSystemResource(myService.getFileFor(fileName)); 
+        File a = new File("/app/src/main/resources/ValidatedQuestionnaires/recreation.json");
+        return new FileSystemResource(a); 
     }
 }
 
