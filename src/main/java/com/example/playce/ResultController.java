@@ -19,23 +19,23 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin
 @RestController
 public class ResultController {
-    
+
     @RequestMapping("/result")
     public Result generateResult(@RequestParam(value="name", defaultValue="Firestone Grill") String name) {
-       return new Result(name, 1, 1, "address is not given", "no category");
+       return new Result(name, 1, 1, "address is not given", "no category", 35.2862, -120.654);
     }
 
     @RequestMapping("/getPlayceResult")
     public Result generatePlayceResult(@RequestParam(value="name", defaultValue = "Firestone Grill") String playceName) {
        try {
-          Class.forName("com.mysql.jdbc.Driver");                             
-          Connection con = DriverManager.getConnection(                       
-          "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");                
+          Class.forName("com.mysql.jdbc.Driver");
+          Connection con = DriverManager.getConnection(
+          "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");
           Statement stmt = con.createStatement();
           String query = "select * from playces where name=\"" + playceName + "\"";
           ResultSet rs = stmt.executeQuery(query);
-          rs.next();  
-	  return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+          rs.next();
+	  return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8));
 
 /*
 // used in retrieving column names
@@ -49,24 +49,24 @@ public class ResultController {
        // 3: price
        // 4: rating
        // 5: address
-       // 6: type 
+       // 6: type
 
          return new Result("getting col count", colCount, 0, , "no type given");
 */
        } catch (Exception e) {
          System.out.println(e);
-         return new Result(e.toString(), 0, 0, "address is not given", "no type given");
+         return new Result(e.toString(), 0, 0, "address is not given", "no type given", 0, 0);
        }
 
     }
 
-    
+
     @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
     public MultipleResults generateResultsFromQuestionnaire(@RequestBody Questionnaire questionnaireResult) {
       try {
-          Class.forName("com.mysql.jdbc.Driver");                             
-          Connection con = DriverManager.getConnection(                       
-          "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");                
+          Class.forName("com.mysql.jdbc.Driver");
+          Connection con = DriverManager.getConnection(
+          "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");
           Statement stmt = con.createStatement();
           int price = 0;
           String priceQuest = questionnaireResult.getPrice();
@@ -85,7 +85,7 @@ public class ResultController {
 
           String query = "";
           if (questionnaireResult.getCategory().equals("restaurant")) {
-             if (questionnaireResult.isOver21()) {   
+             if (questionnaireResult.isOver21()) {
                 query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaireResult.getCuisine() + "\" and age<=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
              }
              else {
@@ -93,7 +93,7 @@ public class ResultController {
              }
           }
           else if (questionnaireResult.getCategory().equals("shopping")) {
-             if (questionnaireResult.isOver21()) {   
+             if (questionnaireResult.isOver21()) {
                 query = "select * from playces where price<=\"" + price + "\" and age<=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
              }
              else {
@@ -103,21 +103,21 @@ public class ResultController {
           else {
                 query = "select * from playces where price<=\"" + price + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
           }
-          
+
           ResultSet rs = stmt.executeQuery(query);
 
           MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
           int count = 0;
           Result[] r = new Result[5];
           while (rs.next() && count < 5) {
-	     r[count] = (new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6)));
-             count++;             
+	     r[count] = (new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8)));
+             count++;
           }
- 
+
 	  return multR.results(r).build();
        } catch (Exception e) {
           Result[] r = new Result[1];
-          r[0] = new Result(e.toString(), 0, 0, "address is not given", "no type given");
+          r[0] = new Result(e.toString(), 0, 0, "address is not given", "no type given", 0, 0);
          return new MultipleResults(r);
        }
     }

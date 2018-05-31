@@ -7,13 +7,17 @@ public class Result {
     private final double rating;
     private final String address;
     private final String category;
+    private final double latitude;
+    private final double longitude;
 
-    public Result(String name, int price, double rating, String address, String category) {
+    public Result(String name, int price, double rating, String address, String category, double latitude, double longitude) {
         this.name = name;
         this.price = price;
         this.rating = rating;
         this.address = address;
         this.category = category;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getName() {
@@ -34,5 +38,13 @@ public class Result {
 
     public String getCategory() {
         return category;
+    }
+
+    public double getLatitude() {
+       return latitude;
+    }
+
+    public double getLongitude() {
+       return longitude;
     }
 }
