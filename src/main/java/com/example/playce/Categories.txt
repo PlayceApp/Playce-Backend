@@ -1,0 +1,44 @@
+{
+   "restaurant": [
+      {
+         "question": "Hi kent",
+         "shorthand": "Greeting",
+         "answers": [ "Hi", "Go away." ],
+         "view": "MultiChoiceView"
+      }, {
+         "question": "Who are you going with?",
+         "shorthand": "Friends",
+         "answers": [ ],
+         "view": "TextAnswerView"
+      }, {
+         "question": "Are you over 21?",
+         "shorthand": "21+",
+         "answers": [
+            "Yes",
+            "No"
+         ],
+         "view": "MultiChoiceView"
+      }, {
+         "question": "What type of food are you looking for?",
+         "shorthand": "Type",
+         "answers": [
+            "Asian",
+            "Mexican",
+            "American",
+            "Indian",
+            "Surprise Me"
+         ],
+         "view": "MultiChoiceView"
+      }, {
+         "question": "How far are you willing to travel?",
+         "shorthand": "Distance",
+         "answers": [
+            "< 1 Mile",
+            "1-5 Miles",
+            "5-10 Miles",
+            "10+ Miles"
+         ],
+         "view": "MultiChoiceView"
+      }
+   ]
+}

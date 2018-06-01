@@ -1,0 +1,65 @@
+{
+   "Food & Drink": [
+      "Establishment": {
+         "question": "What are you feeling?",
+         "shorthand": "Establishment",
+         "answers": [
+            {},
+            "Coffee & Tea",
+            "Restaurant & Cafe"
+         ],
+         "view": "MultiChoiceView",
+      }, "Cuisine": {
+         "question": "What type of cuisine are you looking for?",
+         "shorthand": "Cuisine",
+         "answers": [
+            "American",
+            "Chinese",
+            "German",
+            "Indian",
+            "Italian",
+            "Japanese",
+            "Mediterranean",
+            "Mexican",
+            "Morrocan",
+            "Thai",
+            "Vietnamese"
+         ],
+         "view": "MultiChoiceView"
+      }, {
+         "question": "What kind of food are you feeling?",
+         "shorthand": "Friends",
+         "answers": [ ],
+         "view": "TextAnswerView"
+      }, {
+         "question": "Are you over 21?",
+         "shorthand": "21+",
+         "answers": [
+            "Yes",
+            "No"
+         ],
+         "view": "MultiChoiceView"
+      }, {
+         "question": "What type of food are you looking for?",
+         "shorthand": "Type",
+         "answers": [
+            "Asian",
+            "Mexican",
+            "American",
+            "Indian",
+            "Surprise Me"
+         ],
+         "view": "MultiChoiceView"
+      }, {
+         "question": "How far are you willing to travel?",
+         "shorthand": "Distance",
+         "answers": [
+            "< 1 Mile",
+            "1-5 Miles",
+            "5-10 Miles",
+            "10+ Miles"
+         ],
+         "view": "MultiChoiceView"
+      }
+   ]
+}
