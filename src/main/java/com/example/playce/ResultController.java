@@ -44,45 +44,13 @@ public class ResultController {
             rs = pstmt.executeQuery();
             rs.next();
             return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8));
-
-            /*
-            // used in retrieving column names
-               ResultSetMetaData rsmd = rs.getMetaData();
-               int colCount = rsmd.getColumnCount();
-               String secCol = rsmd.getColumnName(7);
-               String thirdCol = rsmd.getColumnName(5);
-            // return new Result(secCol, colCount, 1, thirdCol);
-            // 1: id
-            // 2: name
-            // 3: price
-            // 4: rating
-            // 5: address
-            // 6: type
-
-               return new Result("getting col count", colCount, 0, , "no type given");
-            */
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println(e);
             return new Result(e.toString(), 0, 0, "address is not given", "no type given", 0, 0);
         } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (Exception e) { /* ignored */ }
-            }
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (Exception e) { /* ignored */ }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (Exception e) { /* ignored */ }
-            }
+            closeConnections(rs, pstmt, con);
         }
     }
-
 
     @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
     public MultipleResults generateResultsFromQuestionnaire(@RequestBody Questionnaire questionnaireResult) {
@@ -110,37 +78,26 @@ public class ResultController {
             if (questionnaireResult.getCategory().equals("restaurant")) {
                 if (questionnaireResult.isOver21()) {
                     query = "select * from playces where price <= ? and cuisine = ? and age <= ? and type = ? and rating >= ?";
-                    pstmt = con.prepareStatement(query);
-                    pstmt.setInt(1, price);
-                    pstmt.setString(2, questionnaireResult.getCuisine());
-                    pstmt.setInt(3, questionnaireResult.getAge());
-                    pstmt.setString(4, questionnaireResult.getCategory());
-                    pstmt.setDouble(5, questionnaireResult.getRating());
                 } else {
                     query = "select * from playces where price <= ? and cuisine = ? and age = ? and type = ? and rating >= ?";
-                    pstmt = con.prepareStatement(query);
-                    pstmt.setInt(1, price);
-                    pstmt.setString(2, questionnaireResult.getCuisine());
-                    pstmt.setInt(3, questionnaireResult.getAge());
-                    pstmt.setString(4, questionnaireResult.getCategory());
-                    pstmt.setDouble(5, questionnaireResult.getRating());
                 }
+                pstmt = con.prepareStatement(query);
+                pstmt.setInt(1, price);
+                pstmt.setString(2, questionnaireResult.getCuisine());
+                pstmt.setInt(3, questionnaireResult.getAge());
+                pstmt.setString(4, questionnaireResult.getCategory());
+                pstmt.setDouble(5, questionnaireResult.getRating());
             } else if (questionnaireResult.getCategory().equals("shopping")) {
                 if (questionnaireResult.isOver21()) {
                     query = "select * from playces where price <= ? and age <= ? and type = ? and rating >= ?";
-                    pstmt = con.prepareStatement(query);
-                    pstmt.setInt(1, price);
-                    pstmt.setInt(2, questionnaireResult.getAge());
-                    pstmt.setString(3, questionnaireResult.getCategory());
-                    pstmt.setDouble(4, questionnaireResult.getRating());
                 } else {
                     query = "select * from playces where price <= ? and age = ? and type = ? and rating >= ?";
-                    pstmt = con.prepareStatement(query);
-                    pstmt.setInt(1, price);
-                    pstmt.setInt(2, questionnaireResult.getAge());
-                    pstmt.setString(3, questionnaireResult.getCategory());
-                    pstmt.setDouble(4, questionnaireResult.getRating());
                 }
+                pstmt = con.prepareStatement(query);
+                pstmt.setInt(1, price);
+                pstmt.setInt(2, questionnaireResult.getAge());
+                pstmt.setString(3, questionnaireResult.getCategory());
+                pstmt.setDouble(4, questionnaireResult.getRating());
             } else {
                 query = "select * from playces where price <= ? and type = ? and rating >= ?";
                 pstmt = con.prepareStatement(query);
@@ -165,21 +122,25 @@ public class ResultController {
             r[0] = new Result(e.toString(), 0, 0, "address is not given", "no type given", 0, 0);
             return new MultipleResults(r);
         } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (Exception e) { /* ignored */ }
-            }
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (Exception e) { /* ignored */ }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (Exception e) { /* ignored */ }
-            }
+            closeConnections(rs, pstmt, con);
+        }
+    }
+
+    private void closeConnections(ResultSet rs, PreparedStatement pstmt, Connection con) {
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (Exception e) { /* ignored */ }
+        }
+        if (pstmt != null) {
+            try {
+                pstmt.close();
+            } catch (Exception e) { /* ignored */ }
+        }
+        if (con != null) {
+            try {
+                con.close();
+            } catch (Exception e) { /* ignored */ }
         }
     }
 }
