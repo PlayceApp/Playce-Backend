@@ -1,29 +1,25 @@
 package com.example.playce;
 
-import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.Connection;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import java.util.Optional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin
 @RestController
 public class ResultController {
+   private static final String ADDRESS_NOT_GIVEN = "Address not given";
+   private static final String NO_TYPE_GIVEN = "No type given";
 
     @RequestMapping("/result")
     public Result generateResult(@RequestParam(value = "name", defaultValue = "Firestone Grill") String name) {
-        return new Result(name, 1, 1, "address is not given", "no category", 35.2862, -120.654);
+        return new Result(name, 1, 1, ADDRESS_NOT_GIVEN, "no category", 35.2862, -120.654);
     }
 
     @RequestMapping("/getPlayceResult")
@@ -46,7 +42,7 @@ public class ResultController {
             return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8));
         } catch (Exception e) {
             System.err.println(e);
-            return new Result(e.toString(), 0, 0, "address is not given", "no type given", 0, 0);
+            return new Result(e.toString(), 0, 0, ADDRESS_NOT_GIVEN, NO_TYPE_GIVEN, 0, 0);
         } finally {
             closeConnections(rs, pstmt, con);
         }
@@ -119,7 +115,7 @@ public class ResultController {
             return multR.results(r).build();
         } catch (Exception e) {
             Result[] r = new Result[1];
-            r[0] = new Result(e.toString(), 0, 0, "address is not given", "no type given", 0, 0);
+            r[0] = new Result(e.toString(), 0, 0, ADDRESS_NOT_GIVEN, NO_TYPE_GIVEN, 0, 0);
             return new MultipleResults(r);
         } finally {
             closeConnections(rs, pstmt, con);
