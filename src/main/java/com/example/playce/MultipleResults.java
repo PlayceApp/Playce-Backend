@@ -1,6 +1,5 @@
 package com.example.playce;
 
-import java.util.Optional;
 import lombok.Builder;
 
 // goes from shortest to longest distance

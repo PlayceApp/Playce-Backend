@@ -14,22 +14,19 @@ public class JSONController {
     @RequestMapping("/recreation")
     @ResponseBody
     public String recreation() throws IOException {
-        String contents = new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/recreation.json")));
-        return contents;
+        return new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/recreation.json")));
     }
 
     @RequestMapping("/restaurant")
     @ResponseBody
     public String restaurant() throws IOException {
-        String contents = new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/restaurant.json")));
-        return contents;
+        return new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/restaurant.json")));
     }
 
     @RequestMapping("/shopping")
     @ResponseBody
     public String shopping() throws IOException {
-        String contents = new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/shopping.json")));
-        return contents;
+        return new String(Files.readAllBytes(Paths.get("/app/src/main/resources/ValidatedQuestionnaires/shopping.json")));
     }
 }
 

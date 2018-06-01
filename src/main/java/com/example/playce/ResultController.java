@@ -41,7 +41,6 @@ public class ResultController {
             rs.next();
             return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8));
         } catch (Exception e) {
-            System.err.println(e);
             return new Result(e.toString(), 0, 0, ADDRESS_NOT_GIVEN, NO_TYPE_GIVEN, 0, 0);
         } finally {
             closeConnections(rs, pstmt, con);
@@ -49,7 +48,7 @@ public class ResultController {
     }
 
     @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
-    public MultipleResults generateResultsFromQuestionnaire(@RequestBody Questionnaire questionnaireResult) {
+    public MultipleResults generateResults(@RequestBody Questionnaire questionnaire) {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -58,48 +57,38 @@ public class ResultController {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(
                 "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");
-            int price = 0;
-            String priceQuest = questionnaireResult.getPrice();
-            if (priceQuest.equals("$")) {
-                price = 1;
-            } else if (priceQuest.equals("$$")) {
-                price = 2;
-            } else if (priceQuest.equals("$$$")) {
-                price = 3;
-            } else {
-                price = 4;
-            }
+            int price = questionnaire.getPrice().length();
 
             String query = "";
-            if (questionnaireResult.getCategory().equals("restaurant")) {
-                if (questionnaireResult.isOver21()) {
+            if (questionnaire.getCategory().equals("restaurant")) {
+                if (questionnaire.isOver21()) {
                     query = "select * from playces where price <= ? and cuisine = ? and age <= ? and type = ? and rating >= ?";
                 } else {
                     query = "select * from playces where price <= ? and cuisine = ? and age = ? and type = ? and rating >= ?";
                 }
                 pstmt = con.prepareStatement(query);
                 pstmt.setInt(1, price);
-                pstmt.setString(2, questionnaireResult.getCuisine());
-                pstmt.setInt(3, questionnaireResult.getAge());
-                pstmt.setString(4, questionnaireResult.getCategory());
-                pstmt.setDouble(5, questionnaireResult.getRating());
-            } else if (questionnaireResult.getCategory().equals("shopping")) {
-                if (questionnaireResult.isOver21()) {
+                pstmt.setString(2, questionnaire.getCuisine());
+                pstmt.setInt(3, questionnaire.getAge());
+                pstmt.setString(4, questionnaire.getCategory());
+                pstmt.setDouble(5, questionnaire.getRating());
+            } else if (questionnaire.getCategory().equals("shopping")) {
+                if (questionnaire.isOver21()) {
                     query = "select * from playces where price <= ? and age <= ? and type = ? and rating >= ?";
                 } else {
                     query = "select * from playces where price <= ? and age = ? and type = ? and rating >= ?";
                 }
                 pstmt = con.prepareStatement(query);
                 pstmt.setInt(1, price);
-                pstmt.setInt(2, questionnaireResult.getAge());
-                pstmt.setString(3, questionnaireResult.getCategory());
-                pstmt.setDouble(4, questionnaireResult.getRating());
+                pstmt.setInt(2, questionnaire.getAge());
+                pstmt.setString(3, questionnaire.getCategory());
+                pstmt.setDouble(4, questionnaire.getRating());
             } else {
                 query = "select * from playces where price <= ? and type = ? and rating >= ?";
                 pstmt = con.prepareStatement(query);
                 pstmt.setInt(1, price);
-                pstmt.setString(2, questionnaireResult.getCategory());
-                pstmt.setDouble(3, questionnaireResult.getRating());
+                pstmt.setString(2, questionnaire.getCategory());
+                pstmt.setDouble(3, questionnaire.getRating());
             }
 
             rs = pstmt.executeQuery();
