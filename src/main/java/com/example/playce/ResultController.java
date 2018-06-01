@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.*;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,34 +29,37 @@ public class ResultController {
     @RequestMapping("/getPlayceResult")
     public Result generatePlayceResult(@RequestParam(value = "name", defaultValue = "Firestone Grill") String playceName) {
         Connection con = null;
-        Statement stmt = null;
         ResultSet rs = null;
+        PreparedStatement pstmt = null;
+        String query = "select * from playces where name=?";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(
                 "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");
-            stmt = con.createStatement();
-            String query = "select * from playces where name=\"" + playceName + "\"";
-            rs = stmt.executeQuery(query);
+
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, playceName);
+
+            rs = pstmt.executeQuery();
             rs.next();
             return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8));
 
             /*
             // used in retrieving column names
-                      ResultSetMetaData rsmd = rs.getMetaData();
-                      int colCount = rsmd.getColumnCount();
-                      String secCol = rsmd.getColumnName(7);
-                      String thirdCol = rsmd.getColumnName(5);
-                      //return new Result(secCol, colCount, 1, thirdCol);
-                   // 1: id
-                   // 2: name
-                   // 3: price
-                   // 4: rating
-                   // 5: address
-                   // 6: type
+               ResultSetMetaData rsmd = rs.getMetaData();
+               int colCount = rsmd.getColumnCount();
+               String secCol = rsmd.getColumnName(7);
+               String thirdCol = rsmd.getColumnName(5);
+            // return new Result(secCol, colCount, 1, thirdCol);
+            // 1: id
+            // 2: name
+            // 3: price
+            // 4: rating
+            // 5: address
+            // 6: type
 
-                     return new Result("getting col count", colCount, 0, , "no type given");
+               return new Result("getting col count", colCount, 0, , "no type given");
             */
         } catch (Exception e) {
             System.out.println(e);
@@ -66,9 +70,9 @@ public class ResultController {
                     rs.close();
                 } catch (Exception e) { /* ignored */ }
             }
-            if (stmt != null) {
+            if (pstmt != null) {
                 try {
-                    stmt.close();
+                    pstmt.close();
                 } catch (Exception e) { /* ignored */ }
             }
             if (con != null) {
@@ -83,14 +87,13 @@ public class ResultController {
     @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
     public MultipleResults generateResultsFromQuestionnaire(@RequestBody Questionnaire questionnaireResult) {
         Connection con = null;
-        Statement stmt = null;
+        PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(
                 "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");
-            stmt = con.createStatement();
             int price = 0;
             String priceQuest = questionnaireResult.getPrice();
             if (priceQuest.equals("$")) {
@@ -106,21 +109,47 @@ public class ResultController {
             String query = "";
             if (questionnaireResult.getCategory().equals("restaurant")) {
                 if (questionnaireResult.isOver21()) {
-                    query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaireResult.getCuisine() + "\" and age<=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+                    query = "select * from playces where price <= ? and cuisine = ? and age <= ? and type = ? and rating >= ?";
+                    pstmt = con.prepareStatement(query);
+                    pstmt.setInt(1, price);
+                    pstmt.setString(2, questionnaireResult.getCuisine());
+                    pstmt.setInt(3, questionnaireResult.getAge());
+                    pstmt.setString(4, questionnaireResult.getCategory());
+                    pstmt.setDouble(5, questionnaireResult.getRating());
                 } else {
-                    query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaireResult.getCuisine() + "\" and age=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+                    query = "select * from playces where price <= ? and cuisine = ? and age = ? and type = ? and rating >= ?";
+                    pstmt = con.prepareStatement(query);
+                    pstmt.setInt(1, price);
+                    pstmt.setString(2, questionnaireResult.getCuisine());
+                    pstmt.setInt(3, questionnaireResult.getAge());
+                    pstmt.setString(4, questionnaireResult.getCategory());
+                    pstmt.setDouble(5, questionnaireResult.getRating());
                 }
             } else if (questionnaireResult.getCategory().equals("shopping")) {
                 if (questionnaireResult.isOver21()) {
-                    query = "select * from playces where price<=\"" + price + "\" and age<=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+                    query = "select * from playces where price <= ? and age <= ? and type = ? and rating >= ?";
+                    pstmt = con.prepareStatement(query);
+                    pstmt.setInt(1, price);
+                    pstmt.setInt(2, questionnaireResult.getAge());
+                    pstmt.setString(3, questionnaireResult.getCategory());
+                    pstmt.setDouble(4, questionnaireResult.getRating());
                 } else {
-                    query = "select * from playces where price<=\"" + price + "\" and age=\"" + questionnaireResult.getAge() + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+                    query = "select * from playces where price <= ? and age = ? and type = ? and rating >= ?";
+                    pstmt = con.prepareStatement(query);
+                    pstmt.setInt(1, price);
+                    pstmt.setInt(2, questionnaireResult.getAge());
+                    pstmt.setString(3, questionnaireResult.getCategory());
+                    pstmt.setDouble(4, questionnaireResult.getRating());
                 }
             } else {
-                query = "select * from playces where price<=\"" + price + "\" and type=\"" + questionnaireResult.getCategory() + "\" and rating>=\"" + questionnaireResult.getRating() + "\"";
+                query = "select * from playces where price <= ? and type = ? and rating >= ?";
+                pstmt = con.prepareStatement(query);
+                pstmt.setInt(1, price);
+                pstmt.setString(2, questionnaireResult.getCategory());
+                pstmt.setDouble(3, questionnaireResult.getRating());
             }
 
-            rs = stmt.executeQuery(query);
+            rs = pstmt.executeQuery();
 
             MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
             int count = 0;
@@ -141,9 +170,9 @@ public class ResultController {
                     rs.close();
                 } catch (Exception e) { /* ignored */ }
             }
-            if (stmt != null) {
+            if (pstmt != null) {
                 try {
-                    stmt.close();
+                    pstmt.close();
                 } catch (Exception e) { /* ignored */ }
             }
             if (con != null) {
