@@ -114,7 +114,7 @@ public class ResultController {
                  r[i].setDistance(distance);
             }
 
-            Arrays.sort(r, new SortByDistance());
+          //  Arrays.sort(r, new SortByDistance());
             
             return multR.results(r).build();
         } catch (Exception e) {
