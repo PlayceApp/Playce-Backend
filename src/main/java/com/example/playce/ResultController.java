@@ -105,11 +105,12 @@ public class ResultController {
             
              double rlat, rlong, qlong, qlat, distance;
              
+             qlat = questionnaire.getLatitude();
+             qlong = questionnaire.getLongitude();
+             
              for (int i = 0; i< count; i++){
                  rlat = r[i].getLatitude();
                  rlong = r[i].getLongitude();
-                 qlat = questionnaire.getLatitude();
-                 qlong = questionnaire.getLongitude();
                  distance = calculateDistance(rlat,rlong,qlat,qlong);
                 // r[i].setDistance(distance);
                  // r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), questionnaire.getLatitude(), questionnaire.getLongitude()));
