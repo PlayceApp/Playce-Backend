@@ -1,6 +1,6 @@
 package com.example.playce;
 
-public class Result implements Comparable<Result>{
+public class Result{
 
     private final String name;
     private final int price;
@@ -53,11 +53,4 @@ public class Result implements Comparable<Result>{
        return longitude;
     }
     //implementing a Ccmparetor to sort and overriding the compareTo to compare distances 
-    @Override
-    public int compareTo(Result o){
-        if (this.getDistance() > o.getDistance())
-            return 1;
-        else
-            return -1;
-    }
 }
