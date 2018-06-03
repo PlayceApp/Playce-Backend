@@ -182,14 +182,14 @@ public class ResultController {
             
              double rlat, rlong, distance;
              
-             for (int i = 0; i< r.length; i++){
+             for (int i = 0; i< count; i++){
                  rlat = r[i].getLatitude();
                  rlong = r[i].getLongitude();
-                 //distance = calculateDistance(rlat,rlong,0,0);
-                 //r[i].setDistance(distance);
+                 distance = calculateDistance(rlat,rlong,0,0);
+                 r[i].setDistance(distance);
                  // r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), questionnaire.getLatitude(), questionnaire.getLongitude()));
             }
-            //Arrays.sort(r);
+            Arrays.sort(r);
             return multR.results(r).build();
         } catch (Exception e) {
             Result[] r = new Result[1];
