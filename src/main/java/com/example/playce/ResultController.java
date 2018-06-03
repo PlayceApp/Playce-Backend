@@ -77,12 +77,12 @@ public class ResultController {
                 colValues.add(questionnaire.getAge());
                 
                 query = createQuery(colNames, colValues);
-                rs = stmt.executeQuery(query);
+                rs = pstmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = stmt.executeQuery(query);
+                   rs = pstmt.executeQuery(query);
                 }                
 
              }
@@ -99,12 +99,12 @@ public class ResultController {
                 colValues.add(questionnaire.getAge());
                 
                 query = createQuery(colNames, colValues);
-                rs = stmt.executeQuery(query);
+                rs = pstmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = stmt.executeQuery(query);
+                   rs = pstmt.executeQuery(query);
                 }                
 
              }
@@ -121,12 +121,12 @@ public class ResultController {
                 colValues.add(questionnaire.getAge());
 
                 query = createQuery(colNames, colValues);
-                rs = stmt.executeQuery(query);
+                rs = pstmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = stmt.executeQuery(query);
+                   rs = pstmt.executeQuery(query);
                 }
 
              }
@@ -141,12 +141,12 @@ public class ResultController {
                 colValues.add(questionnaire.getAge());
 
                 query = createQuery(colNames, colValues);
-                rs = stmt.executeQuery(query);
+                rs = pstmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = stmt.executeQuery(query);
+                   rs = pstmt.executeQuery(query);
                 }
 
              }
@@ -160,12 +160,12 @@ public class ResultController {
                 colValues.add(questionnaire.getRating());
 
                 query = createQuery(colNames, colValues);
-                rs = stmt.executeQuery(query);
+                rs = pstmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = stmt.executeQuery(query);
+                   rs = pstmt.executeQuery(query);
                 }
 
           }
@@ -185,11 +185,11 @@ public class ResultController {
              for (int i = 0; i< r.length; i++){
                  rlat = r[i].getLatitude();
                  rlong = r[i].getLongitude();
-                 distance = calculateDistance(rlat,rlong,0,0);
-                 r[i].setDistance(distance);
+                 //distance = calculateDistance(rlat,rlong,0,0);
+                 //r[i].setDistance(distance);
                  // r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), questionnaire.getLatitude(), questionnaire.getLongitude()));
             }
-            Arrays.sort(r);
+            //Arrays.sort(r);
             return multR.results(r).build();
         } catch (Exception e) {
             Result[] r = new Result[1];
