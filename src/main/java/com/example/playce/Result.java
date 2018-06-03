@@ -57,12 +57,6 @@ public class Result implements Comparable<Result>{
     public int compareTo(Result o){
         if (this.getDistance() > o.getDistance())
             return 1;
-        else if (this.getDistance() == o.getDistance()){
-            if (this.getRating() > o.getRating()){
-                return -1;
-            }else{
-                return 1;
-            }
         }else{
             return -1;
         }
