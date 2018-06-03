@@ -175,8 +175,8 @@ public class ResultController {
             MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
             
             int count = 0;
-            Result[] r = new Result[20];
-            while (rs.next() && count < 20) {
+            Result[] r = new Result[5];
+            while (rs.next() && count < 5) {
                 r[count] = (new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8)));
                 count++;
             }
