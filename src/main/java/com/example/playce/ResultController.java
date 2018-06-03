@@ -102,7 +102,7 @@ public class ResultController {
                 count++;
             }
             for (int i = 0; i< r.length; i++){
-                printf("name: " + r[i].getString());
+                printf("name: " + r[i].getName());
             }
             //need to get the distance now for each result by comparing the current location to the coordinates in the Result objects
 
