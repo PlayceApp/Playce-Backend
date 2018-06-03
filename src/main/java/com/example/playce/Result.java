@@ -1,6 +1,6 @@
 package com.example.playce;
 
-public class Result {
+public class Result implements Comparable{
 
     private final String name;
     private final int price;
@@ -9,6 +9,7 @@ public class Result {
     private final String category;
     private final double latitude;
     private final double longitude;
+    private double distance; 
 
     public Result(String name, int price, double rating, String address, String category, double latitude, double longitude) {
         this.name = name;
@@ -23,7 +24,12 @@ public class Result {
     public String getName() {
         return name;
     }
-
+    public void setDistance(double distance){
+        this.distance = distance;
+    }
+    public double getDistance(){
+        return distance;
+    }
     public int getPrice() {
         return price;
     }
@@ -31,7 +37,6 @@ public class Result {
     public double getRating() {
         return rating;
     }
-
     public String getAddress() {
         return address;
     }
@@ -46,5 +51,10 @@ public class Result {
 
     public double getLongitude() {
        return longitude;
+    }
+    //implementing a Ccmparetor to sort and overriding the compareTo to compare distances 
+    @Override
+    public int compareTo(Object o){
+        return this.getDistance().compareTo((Result) o).getDistance();
     }
 }
