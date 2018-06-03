@@ -105,7 +105,7 @@ public class ResultController {
 
             for (int i = 0; i< r.length; i++){
                 // the 0s are placeholders for the user's location
-                r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), 0, 0));
+                r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), questionnaire.getLatitude(), questionnaire.getLongitude()));
             }
             Arrays.sort(r);
             return multR.results(r).build();
