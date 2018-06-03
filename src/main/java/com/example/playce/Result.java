@@ -56,7 +56,7 @@ public class Result{
     //implementing a Ccmparetor to sort and overriding the compareTo to compare distances 
 }
 class SortByDistance implements Comparator <Result>{
-    public int compare(Result a, Result b){
+    public double compare(Result a, Result b){
         return a.getDistance() - b.getDistance();
     }
 }
