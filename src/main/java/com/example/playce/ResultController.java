@@ -63,18 +63,18 @@ public class ResultController {
           String query = "";
           ArrayList<String> colNames = new ArrayList<String>();
           ArrayList<String> colValues = new ArrayList<String>();
-          if (questionnaireResult.getCategory().equals("restaurant")) {
-             if (questionnaireResult.isOver21()) {
+          if (questionnaire.getCategory().equals("restaurant")) {
+             if (questionnaire.isOver21()) {
                 colNames.add("select * from playces where type=\"");
-                colValues.add(questionaireResult.getCategory());
+                colValues.add(questionaire.getCategory());
                 colNames.add("\" and cuisine=\"");
-                colValues.add(questionaireResult.getCuisine());
+                colValues.add(questionaire.getCuisine());
                 colNames.add("\" and price<=\"");
                 colValues.add(price);
                 colNames.add("\" and rating>=\"");
-                colValues.add(questionaireResult.getRating());
+                colValues.add(questionaire.getRating());
                 colNames.add("\" and age<=\"");
-                colValues.add(questionaireResult.getAge());
+                colValues.add(questionaire.getAge());
                 
                 query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
@@ -88,15 +88,15 @@ public class ResultController {
              }
              else {
                 colNames.add("select * from playces where type=\"");
-                colValues.add(questionaireResult.getCategory());
+                colValues.add(questionaire.getCategory());
                 colNames.add("\" and cuisine=\"");
-                colValues.add(questionaireResult.getCuisine());
+                colValues.add(questionaire.getCuisine());
                 colNames.add("\" and price<=\"");
                 colValues.add(price);
                 colNames.add("\" and rating>=\"");
-                colValues.add(questionaireResult.getRating());
+                colValues.add(questionaire.getRating());
                 colNames.add("\" and age=\"");
-                colValues.add(questionaireResult.getAge());
+                colValues.add(questionaire.getAge());
                 
                 query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
@@ -109,16 +109,16 @@ public class ResultController {
 
              }
           }
-          else if (questionnaireResult.getCategory().equals("shopping")) {
-             if (questionnaireResult.isOver21()) {
+          else if (questionnaire.getCategory().equals("shopping")) {
+             if (questionnaire.isOver21()) {
                 colNames.add("select * from playces where type=\"");
-                colValues.add(questionaireResult.getCategory());
+                colValues.add(questionaire.getCategory());
                 colNames.add("\" and price<=\"");
                 colValues.add(price);
                 colNames.add("\" and rating>=\"");
-                colValues.add(questionaireResult.getRating());
+                colValues.add(questionaire.getRating());
                 colNames.add("\" and age<=\"");
-                colValues.add(questionaireResult.getAge());
+                colValues.add(questionaire.getAge());
 
                 query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
@@ -132,13 +132,13 @@ public class ResultController {
              }
              else {
                 colNames.add("select * from playces where type=\"");
-                colValues.add(questionaireResult.getCategory());
+                colValues.add(questionaire.getCategory());
                 colNames.add("\" and price<=\"");
                 colValues.add(price);
                 colNames.add("\" and rating>=\"");
-                colValues.add(questionaireResult.getRating());
+                colValues.add(questionaire.getRating());
                 colNames.add("\" and age=\"");
-                colValues.add(questionaireResult.getAge());
+                colValues.add(questionaire.getAge());
 
                 query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
@@ -153,11 +153,11 @@ public class ResultController {
           }
           else {
                 colNames.add("select * from playces where type=\"");
-                colValues.add(questionaireResult.getCategory());
+                colValues.add(questionaire.getCategory());
                 colNames.add("\" and price<=\"");
                 colValues.add(price);
                 colNames.add("\" and rating>=\"");
-                colValues.add(questionaireResult.getRating());
+                colValues.add(questionaire.getRating());
 
                 query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
@@ -177,6 +177,9 @@ public class ResultController {
             while (rs.next() && count < 5) {
                 r[count] = (new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8)));
                 count++;
+            }
+            for (int i = 0; i< r.length; i++){
+                System.out.println("name: " + r[i].getName());
             }
             //need to get the distance now for each result by comparing the current location to the coordinates in the Result objects
 
