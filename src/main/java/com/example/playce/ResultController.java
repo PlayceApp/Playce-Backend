@@ -105,7 +105,7 @@ public class ResultController {
             
              double rlat, rlong, distance;
              
-             for (int i = 0; i< r.length; i++){
+             for (int i = 0; i< count; i++){
                  rlat = r[i].getLatitude();
                  rlong = r[i].getLongitude();
                  //distance = calculateDistance(rlat,rlong,0,0);
