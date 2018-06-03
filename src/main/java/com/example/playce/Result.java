@@ -1,6 +1,6 @@
 package com.example.playce;
 
-public class Result implements Comparable<Result>{
+public class Result implements Comparable{
 
     private final String name;
     private final int price;
