@@ -143,4 +143,8 @@ public class ResultController {
         
         return earthRadiusMi * c;
     }
+    public static double degreesToRadians(double degrees) {
+        return degrees * Math.PI / 180;
+    
+    }
 }
