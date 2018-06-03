@@ -1,6 +1,7 @@
 package com.example.playce;
+import java.util.*;
 
-public class Result implements Comparable<Result>{
+public class Result{
 
     private final String name;
     private final int price;
@@ -53,16 +54,20 @@ public class Result implements Comparable<Result>{
        return longitude;
     }
     //implementing a Ccmparetor to sort and overriding the compareTo to compare distances 
-    @Override
-    public int compareTo(Result o){
-        if (this.getDistance() > o.getDistance())
-            return 1;
-        else if (this.getDistance() == o.getDistance()){
-            if (this.getRating() > o.getRating()){
-                return -1;
-            }else{
+}
+class SortByDistance implements Comparator <Result>{
+    public int compare(Result a, Result b){
+        if (a == null || b == null){
+            if (a == null)
                 return 1;
-            }
+            else
+                return -1;
+        }
+
+        if (a.getDistance() > b.getDistance()){
+            return 1;
+        }else if (a.getDistance() == b.getDistance()){
+            return 0;
         }else{
             return -1;
         }
