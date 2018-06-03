@@ -70,11 +70,11 @@ public class ResultController {
                 colNames.add("\" and cuisine=\"");
                 colValues.add(questionnaire.getCuisine());
                 colNames.add("\" and price<=\"");
-                colValues.add(price);
+                colValues.add(String.valueOf(price));
                 colNames.add("\" and rating>=\"");
-                colValues.add(questionnaire.getRating());
+                colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age<=\"");
-                colValues.add(questionnaire.getAge());
+                colValues.add(String.valueOf(questionnaire.getAge()));
                 
                 query = createQuery(colNames, colValues);
                 rs = pstmt.executeQuery(query);
@@ -92,11 +92,11 @@ public class ResultController {
                 colNames.add("\" and cuisine=\"");
                 colValues.add(questionnaire.getCuisine());
                 colNames.add("\" and price<=\"");
-                colValues.add(price);
+                colValues.add(String.valueOf(price));
                 colNames.add("\" and rating>=\"");
-                colValues.add(questionnaire.getRating());
+                colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
-                colValues.add(questionnaire.getAge());
+                colValues.add(String.valueOf(questionnaire.getAge()));
                 
                 query = createQuery(colNames, colValues);
                 rs = pstmt.executeQuery(query);
@@ -114,11 +114,11 @@ public class ResultController {
                 colNames.add("select * from playces where type=\"");
                 colValues.add(questionnaire.getCategory());
                 colNames.add("\" and price<=\"");
-                colValues.add(price);
+                colValues.add(String.valueOf(price));
                 colNames.add("\" and rating>=\"");
-                colValues.add(questionnaire.getRating());
+                colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age<=\"");
-                colValues.add(questionnaire.getAge());
+                colValues.add(String.valueOf(questionnaire.getAge()));
 
                 query = createQuery(colNames, colValues);
                 rs = pstmt.executeQuery(query);
@@ -134,11 +134,11 @@ public class ResultController {
                 colNames.add("select * from playces where type=\"");
                 colValues.add(questionnaire.getCategory());
                 colNames.add("\" and price<=\"");
-                colValues.add(price);
+                colValues.add(String.valueOf(price));
                 colNames.add("\" and rating>=\"");
-                colValues.add(questionnaire.getRating());
+                colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
-                colValues.add(questionnaire.getAge());
+                colValues.add(String.valueOf(questionnaire.getAge()));
 
                 query = createQuery(colNames, colValues);
                 rs = pstmt.executeQuery(query);
@@ -155,9 +155,9 @@ public class ResultController {
                 colNames.add("select * from playces where type=\"");
                 colValues.add(questionnaire.getCategory());
                 colNames.add("\" and price<=\"");
-                colValues.add(price);
+                colValues.add(String.valueOf(price));
                 colNames.add("\" and rating>=\"");
-                colValues.add(questionnaire.getRating());
+                colValues.add(String.valueOf(questionnaire.getRating()));
 
                 query = createQuery(colNames, colValues);
                 rs = pstmt.executeQuery(query);
@@ -173,23 +173,26 @@ public class ResultController {
             MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
             
             int count = 0;
-            Result[] r = new Result[5];
-            while (rs.next() && count < 5) {
+            Result[] r = new Result[20];
+            while (rs.next() && count < 20) {
                 r[count] = (new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8)));
                 count++;
             }
-            //need to get the distance now for each result by comparing the current location to the coordinates in the Result objects
             
-             double rlat, rlong, distance;
+             double rlat, rlong, qlong, qlat, distance;
+             
+             qlat = questionnaire.getLatitude();
+             qlong = questionnaire.getLongitude();
              
              for (int i = 0; i< count; i++){
                  rlat = r[i].getLatitude();
                  rlong = r[i].getLongitude();
-                 distance = calculateDistance(rlat,rlong,0,0);
+                 distance = calculateDistance(rlat,rlong,qlat,qlong);
                  r[i].setDistance(distance);
-                 // r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), questionnaire.getLatitude(), questionnaire.getLongitude()));
             }
-            Arrays.sort(r);
+
+            Arrays.sort(r, new SortByDistance());
+            
             return multR.results(r).build();
         } catch (Exception e) {
             Result[] r = new Result[1];
@@ -198,8 +201,6 @@ public class ResultController {
         } finally {
             closeConnections(rs, pstmt, con);
         }
-
-	return multR.results(r).build();
     }
     private void closeConnections(ResultSet rs, PreparedStatement pstmt, Connection con) {
         if (rs != null) {
@@ -239,7 +240,7 @@ public class ResultController {
 
     private String createQuery(ArrayList<String> colNames, ArrayList<String> colValues) {
           String query = "";
-          for (int i = 0; i < colnames.size(); i++) {
+          for (int i = 0; i < colNames.size(); i++) {
               query += colNames.get(i) + colValues.get(i);
           }
 
