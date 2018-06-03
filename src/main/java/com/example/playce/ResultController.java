@@ -113,6 +113,8 @@ public class ResultController {
 	     r[count] = (new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8)));
              count++;
           }
+          
+          
 
 	  return multR.results(r).build();
        } catch (Exception e) {
@@ -120,5 +122,19 @@ public class ResultController {
           r[0] = new Result(e.toString(), 0, 0, "address is not given", "no type given", 0, 0);
          return new MultipleResults(r);
        }
+    }
+    public double calculateDistance(double lat1, double long1, double lat2, double long2){
+        
+        int earthRadiusMi = 3959;
+        //function sourced from stack overflow
+        //it calculates linear distance between two specified coordinates
+        double dLat = degreesToRadians(lat2-lat1);
+        double dLon = degreesToRadians(long2-long1);
+        double latitude1 = degreesToRadians(lat1);
+        double latitude2 = degreesToRadians(lat2);        
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(latitude1) * Math.cos(latitude2); 
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        
+        return earthRadiusMi * c;
     }
 }
