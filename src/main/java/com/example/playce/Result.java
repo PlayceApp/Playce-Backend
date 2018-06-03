@@ -55,6 +55,6 @@ public class Result implements Comparable{
     //implementing a Ccmparetor to sort and overriding the compareTo to compare distances 
     @Override
     public int compareTo(Object o){
-        return this.getDistance().compareTo((Result) o).getDistance();
+        return this.getDistance() < ((Result)o).getDistance();
     }
 }
