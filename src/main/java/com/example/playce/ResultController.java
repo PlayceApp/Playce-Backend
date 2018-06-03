@@ -109,7 +109,7 @@ public class ResultController {
                  rlat = r[i].getLatitude();
                  rlong = r[i].getLongitude();
                  qlat = questionnaire.getLatitude();
-                 qlong = questionnaire.getLongtitude();
+                 qlong = questionnaire.getLongitude();
                  distance = calculateDistance(rlat,rlong,qlat,qlong);
                 // r[i].setDistance(distance);
                  // r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), questionnaire.getLatitude(), questionnaire.getLongitude()));
