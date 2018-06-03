@@ -103,13 +103,15 @@ public class ResultController {
             }
             //need to get the distance now for each result by comparing the current location to the coordinates in the Result objects
             
-             double rlat, rlong, distance;
+             double rlat, rlong, qlong, qlat, distance;
              
              for (int i = 0; i< count; i++){
                  rlat = r[i].getLatitude();
                  rlong = r[i].getLongitude();
-                 distance = calculateDistance(rlat,rlong,0,0);
-                 r[i].setDistance(distance);
+                 qlat = questionnaire.getLatitude();
+                 qlong = questionnaire.getLongtitude();
+                 distance = calculateDistance(rlat,rlong,qlat,qlong);
+                // r[i].setDistance(distance);
                  // r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), questionnaire.getLatitude(), questionnaire.getLongitude()));
             }
             Arrays.sort(r);
