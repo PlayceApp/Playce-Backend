@@ -1,6 +1,6 @@
 package com.example.playce;
 
-public class Result implements Comparable{
+public class Result implements Comparable<Result>{
 
     private final String name;
     private final int price;
@@ -54,10 +54,17 @@ public class Result implements Comparable{
     }
     //implementing a Ccmparetor to sort and overriding the compareTo to compare distances 
     @Override
-    public int compareTo(Object o){
-        if (this.getDistance() > ((Result)o).getDistance())
+    public int compareTo(Result o){
+        if (this.getDistance() > o.getDistance())
             return 1;
-        else 
+        else if (this.getDistance() == o.getDistance()){
+            if (this.getRating() > o.getRating()){
+                return -1;
+            }else{
+                return 1;
+            }
+        }else{
             return -1;
+        }
     }
 }

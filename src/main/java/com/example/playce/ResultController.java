@@ -107,7 +107,7 @@ public class ResultController {
                 // the 0s are placeholders for the user's location
                 r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), 0, 0));
             }
-            Collections.sort(r);
+            Arrays.sort(r);
             return multR.results(r).build();
         } catch (Exception e) {
             Result[] r = new Result[1];
