@@ -112,10 +112,10 @@ public class ResultController {
                  rlat = r[i].getLatitude();
                  rlong = r[i].getLongitude();
                  distance = calculateDistance(rlat,rlong,qlat,qlong);
-                // r[i].setDistance(distance);
+                 r[i].setDistance(distance);
                  // r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), questionnaire.getLatitude(), questionnaire.getLongitude()));
             }
-           // Arrays.sort(r);
+            Arrays.sort(r);
             return multR.results(r).build();
         } catch (Exception e) {
             Result[] r = new Result[1];
