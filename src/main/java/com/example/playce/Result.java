@@ -57,9 +57,9 @@ public class Result{
 }
 class SortByDistance implements Comparator <Result>{
     public int compare(Result a, Result b){
-        if (a.getDistance() > b.getDistance(){
+        if (a.getDistance() > b.getDistance()){
             return 1;
-        }else if (a.getDistance() == b.getDistance(){
+        }else if (a.getDistance() == b.getDistance()){
             return 0;
         }else{
             return -1;
