@@ -179,12 +179,17 @@ public class ResultController {
                 count++;
             }
             //need to get the distance now for each result by comparing the current location to the coordinates in the Result objects
-
-           /* for (int i = 0; i< r.length; i++){
-                // the 0s are placeholders for the user's location
-                r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), questionnaire.getLatitude(), questionnaire.getLongitude()));
+            
+             double rlat, rlong, distance;
+             
+             for (int i = 0; i< r.length; i++){
+                 rlat = r[i].getLatitude();
+                 rlong = r[i].getLongitude();
+                 distance = calculateDistance(rlat,rlong,0,0);
+                 r[i].setDistance(distance);
+                 // r[i].setDistance(calculateDistance(r[i].getLatitude(), r[i].getLongitude(), questionnaire.getLatitude(), questionnaire.getLongitude()));
             }
-            Arrays.sort(r);*/
+            Arrays.sort(r);
             return multR.results(r).build();
         } catch (Exception e) {
             Result[] r = new Result[1];
