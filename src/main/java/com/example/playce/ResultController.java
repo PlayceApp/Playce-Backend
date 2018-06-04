@@ -12,6 +12,8 @@ import java.sql.*;
 import java.util.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.*;
+import java.lang.*;
+
 @CrossOrigin
 @RestController
 public class ResultController {
@@ -64,9 +66,8 @@ public class ResultController {
             stmt = con.createStatement();
             int price = questionnaire.getPrice().length();
 
-          String query = "";
-          ArrayList<String> colNames = new ArrayList<String>();
-          ArrayList<String> colValues = new ArrayList<String>();
+          ArrayList<String> colNames = new ArrayList<>();
+          ArrayList<String> colValues = new ArrayList<>();
           if (questionnaire.getCategory().equals("restaurant")) {
              if (questionnaire.isOver21()) {
                 colNames.add(TYPE);
@@ -84,7 +85,7 @@ public class ResultController {
 
              }
              else {
-                colNames.add("select * from playces where type=\"");
+                colNames.add(TYPE);
                 colValues.add(questionnaire.getCategory());
                 colNames.add("\" and cuisine=\"");
                 colValues.add(questionnaire.getCuisine());
@@ -100,7 +101,7 @@ public class ResultController {
           }
           else if (questionnaire.getCategory().equals("shopping")) {
              if (questionnaire.isOver21()) {
-                colNames.add("select * from playces where type=\"");
+                colNames.add(TYPE);
                 colValues.add(questionnaire.getCategory());
                 colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
@@ -144,7 +145,11 @@ public class ResultController {
                 count++;
             }
             
-             double rlat, rlong, qlong, qlat, distance;
+             double rlat = 0.0;
+             double rlong = 0.0;
+             double qlong = 0.0;
+             double qlat = 0.0;
+             double distance =0.0;
              
              qlat = questionnaire.getLatitude();
              qlong = questionnaire.getLongitude();
@@ -205,12 +210,14 @@ public class ResultController {
     }
 
     private String createQuery(ArrayList<String> colNames, ArrayList<String> colValues) {
-         String query = "";
+         StringBuilder query = new StringBuilder();
          for (int i = 0; i < colNames.size(); i++) {
-             query += colNames.get(i) + colValues.get(i);
+             query.append(colNames.get(i));
+             query.append(colValues.get(i));
          }
 
-         return query + "\"";
+         query.append("\"");
+         return query.toString();
     }
 
     private ResultSet getResultSet(ArrayList<String> colNames, ArrayList<String> colValues, Statement stmt) throws Exception {
