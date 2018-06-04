@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.*;
@@ -79,9 +80,6 @@ public class ResultController {
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
-
-                rs = getResultSet(colNames, colValues, stmt);
-
              }
              else {
                 colNames.add(TYPE);
@@ -94,8 +92,6 @@ public class ResultController {
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
-
-                rs = getResultSet(colNames, colValues, stmt);
              }
           }
           else if (questionnaire.getCategory().equals("shopping")) {
@@ -108,8 +104,6 @@ public class ResultController {
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
-
-                rs = getResultSet(colNames, colValues, stmt);
              }
              else {
                 colNames.add(TYPE);
@@ -120,19 +114,26 @@ public class ResultController {
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
-
-                rs = getResultSet(colNames, colValues, stmt);
              }
           }
           else {
-                colNames.add("select * from playces where type=\"");
+                colNames.add(TYPE);
                 colValues.add(questionnaire.getCategory());
                 colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
                 colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
 
-                rs = getResultSet(colNames, colValues, stmt);
+          }
+          String query = createQuery(colNames, colValues);
+          rs = stmt.executeQuery(query);
+
+          while (!rs.next() && colNames.size() > 1) {
+             colNames.remove(colNames.size() - 1);
+             colValues.remove(colValues.size() - 1);
+             query = createQuery(colNames, colValues);
+             rs.close();
+             rs = stmt.executeQuery(query);
           }
 
             MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
@@ -143,13 +144,13 @@ public class ResultController {
                 r[count] = (new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8)));
                 count++;
             }
-            
+
              double rlat = 0.0;
              double rlong = 0.0;
              double qlong = 0.0;
              double qlat = 0.0;
              double distance =0.0;
-             
+
              qlat = questionnaire.getLatitude();
              qlong = questionnaire.getLongitude();
 
@@ -217,24 +218,5 @@ public class ResultController {
 
          query.append("\"");
          return query.toString();
-    }
-
-    private ResultSet getResultSet(ArrayList<String> colNames, ArrayList<String> colValues, Statement stmt) throws Exception {
-        String query = createQuery(colNames, colValues);
-        ResultSet rs = null;
-        try {
-           while (!rs.next() && colNames.size() > 1) {
-              colNames.remove(colNames.size() - 1);
-              colValues.remove(colValues.size() - 1);
-              query = createQuery(colNames, colValues);
-              rs = stmt.executeQuery(query);
-           }
-           return rs;
-        } catch (Exception e) {
-            throw new Exception();
-        } finally {
-            closeConnections(rs, null, null);
-        }
-
     }
 }
