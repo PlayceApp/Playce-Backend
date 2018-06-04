@@ -77,15 +77,13 @@ public class ResultController {
                 colNames.add("\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
                 
-                //query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaire.getCuisine() + "\" and age<=\"" + questionnaire.getAge() + "\" and type=\"" + questionnaire.getCategory() + "\" and rating>=\"" + questionnaire.getRating() + "\"";
-
                 query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = pstmt.executeQuery(query);
+                   rs = stmt.executeQuery(query);
                 }                
 
              }
