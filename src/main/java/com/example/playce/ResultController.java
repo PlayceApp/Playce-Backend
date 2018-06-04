@@ -69,15 +69,12 @@ public class ResultController {
           ArrayList<String> colValues = new ArrayList<String>();
           if (questionnaire.getCategory().equals("restaurant")) {
              if (questionnaire.isOver21()) {
-                //colNames.add("select * from playces where type=\"");
                 colNames.add(TYPE);
                 colValues.add(questionnaire.getCategory());
                 colNames.add("\" and cuisine=\"");
                 colValues.add(questionnaire.getCuisine());
-                //colNames.add("\" and price<=\"");
                 colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
-                //colNames.add("\" and rating>=\"");
                 colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age<=\"");
@@ -85,114 +82,57 @@ public class ResultController {
                 
                 rs = getResultSet(colNames, colValues, stmt);
 
-                /*query = createQuery(colNames, colValues);
-                rs = stmt.executeQuery(query);
-                while (!rs.next() && colNames.size() > 1) {
-                   colNames.remove(colNames.size() - 1);
-                   colValues.remove(colValues.size() - 1);
-                   query = createQuery(colNames, colValues);
-                   rs = stmt.executeQuery(query);
-                } */               
-
              }
              else {
                 colNames.add("select * from playces where type=\"");
                 colValues.add(questionnaire.getCategory());
                 colNames.add("\" and cuisine=\"");
                 colValues.add(questionnaire.getCuisine());
-                //colNames.add("\" and price<=\"");
                 colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
-                //colNames.add("\" and rating>=\"");
                 colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
                 
                 rs = getResultSet(colNames, colValues, stmt);
-
-                /*query = createQuery(colNames, colValues);
-                rs = stmt.executeQuery(query);
-                while (!rs.next() && colNames.size() > 1) {
-                   colNames.remove(colNames.size() - 1);
-                   colValues.remove(colValues.size() - 1);
-                   query = createQuery(colNames, colValues);
-                   rs = stmt.executeQuery(query);
-                }*/                
-
              }
           }
           else if (questionnaire.getCategory().equals("shopping")) {
              if (questionnaire.isOver21()) {
                 colNames.add("select * from playces where type=\"");
                 colValues.add(questionnaire.getCategory());
-                //colNames.add("\" and price<=\"");
                 colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
-                //colNames.add("\" and rating>=\"");
                 colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
 
                 rs = getResultSet(colNames, colValues, stmt);
-
-                /*query = createQuery(colNames, colValues);
-                rs = stmt.executeQuery(query);
-                while (!rs.next() && colNames.size() > 1) {
-                   colNames.remove(colNames.size() - 1);
-                   colValues.remove(colValues.size() - 1);
-                   query = createQuery(colNames, colValues);
-                   rs = stmt.executeQuery(query);
-                }*/
-
              }
              else {
                 colNames.add("select * from playces where type=\"");
                 colValues.add(questionnaire.getCategory());
-                //colNames.add("\" and price<=\"");
                 colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
-                //colNames.add("\" and rating>=\"");
                 colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
 
-                rs = getResultSet(colnames, colValues, stmt);
-
-                /*query = createQuery(colNames, colValues);
-                rs = stmt.executeQuery(query);
-                while (!rs.next() && colNames.size() > 1) {
-                   colNames.remove(colNames.size() - 1);
-                   colValues.remove(colValues.size() - 1);
-                   query = createQuery(colNames, colValues);
-                   rs = stmt.executeQuery(query);
-                }*/
-
+                rs = getResultSet(colNames, colValues, stmt);
              }
           }
           else {
                 colNames.add("select * from playces where type=\"");
                 colValues.add(questionnaire.getCategory());
                 colNames.add(PRICE);
-                //colNames.add("\" and price<=\"");
                 colValues.add(String.valueOf(price));
-                //colNames.add("\" and rating>=\"");
                 colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
 
                 rs = getResultSet(colNames, colValues, stmt);
-
-                /*query = createQuery(colNames, colValues);
-                rs = stmt.executeQuery(query);
-                while (!rs.next() && colNames.size() > 1) {
-                   colNames.remove(colNames.size() - 1);
-                   colValues.remove(colValues.size() - 1);
-                   query = createQuery(colNames, colValues);
-                   rs = stmt.executeQuery(query);
-                }*/
-
           }
 
             MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
