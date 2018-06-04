@@ -202,7 +202,6 @@ public class ResultController {
             return new MultipleResults(r);
         } finally {
             closeConnections(rs, stmt, con);
-            return new MultipleResults(r);
         }
     }
     private void closeConnections(ResultSet rs, Statement stmt, Connection con) {
