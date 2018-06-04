@@ -83,7 +83,7 @@ public class ResultController {
                 colNames.add("\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
                 
-                rs = getResultSet(colNames, colValues);
+                rs = getResultSet(colNames, colValues, stmt);
 
                 /*query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
@@ -109,14 +109,16 @@ public class ResultController {
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
                 
-                query = createQuery(colNames, colValues);
+                rs = getResultSet(colNames, colValues, stmt);
+
+                /*query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
                    rs = stmt.executeQuery(query);
-                }                
+                }*/                
 
              }
           }
@@ -133,14 +135,16 @@ public class ResultController {
                 colNames.add("\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
 
-                query = createQuery(colNames, colValues);
+                rs = getResultSet(colNames, colValues, stmt);
+
+                /*query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
                    rs = stmt.executeQuery(query);
-                }
+                }*/
 
              }
              else {
@@ -155,14 +159,16 @@ public class ResultController {
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
 
-                query = createQuery(colNames, colValues);
+                rs = getResultSet(colnames, colValues, stmt);
+
+                /*query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
                    rs = stmt.executeQuery(query);
-                }
+                }*/
 
              }
           }
@@ -176,14 +182,16 @@ public class ResultController {
                 colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
 
-                query = createQuery(colNames, colValues);
+                rs = getResultSet(colNames, colValues, stmt);
+
+                /*query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
                    rs = stmt.executeQuery(query);
-                }
+                }*/
 
           }
 
