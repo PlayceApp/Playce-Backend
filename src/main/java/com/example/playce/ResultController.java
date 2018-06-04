@@ -159,7 +159,7 @@ public class ResultController {
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
 
-                rs = getResultSet(colnames, colValues, stmt);
+                rs = getResultSet(colNames, colValues, stmt);
 
                 /*query = createQuery(colNames, colValues);
                 rs = stmt.executeQuery(query);
