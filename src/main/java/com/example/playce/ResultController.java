@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.*;
@@ -17,11 +16,11 @@ import java.util.*;
 @CrossOrigin
 @RestController
 public class ResultController {
-   private static final String ADDRESS_NOT_GIVEN = "Address not given";
-   private static final String NO_TYPE_GIVEN = "No type given";
-   private static final String TYPE = "select * from playces where type=\"";
-   private static final String PRICE = "\" and price<=\"";
-   private static final String RATING = "\" and rating>=\"";
+    private static final String ADDRESS_NOT_GIVEN = "Address not given";
+    private static final String NO_TYPE_GIVEN = "No type given";
+    private static final String TYPE = "select * from playces where type=\"";
+    private static final String PRICE = "\" and price<=\"";
+    private static final String RATING = "\" and rating>=\"";
 
     @RequestMapping("/result")
     public Result generateResult(@RequestParam(value = "name", defaultValue = "Firestone Grill") String name) {
@@ -58,83 +57,45 @@ public class ResultController {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
+        ArrayList < String > colNames = new ArrayList < > ();
+        ArrayList < String > colValues = new ArrayList < > ();
+        int price = questionnaire.getPrice().length();
+        boolean isRestaurant = questionnaire.getCategory().equals("restaurant");
+        boolean isShopping = questionnaire.getCategory().equals("shopping");
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(
                 "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");
             stmt = con.createStatement();
-            int price = questionnaire.getPrice().length();
 
-          ArrayList<String> colNames = new ArrayList<>();
-          ArrayList<String> colValues = new ArrayList<>();
-          if (questionnaire.getCategory().equals("restaurant")) {
-             if (questionnaire.isOver21()) {
-                colNames.add(TYPE);
-                colValues.add(questionnaire.getCategory());
+            colNames.add(TYPE);
+            colValues.add(questionnaire.getCategory());
+
+            if (isRestaurant) {
                 colNames.add("\" and cuisine=\"");
                 colValues.add(questionnaire.getCuisine());
-                colNames.add(PRICE);
-                colValues.add(String.valueOf(price));
-                colNames.add(RATING);
-                colValues.add(String.valueOf(questionnaire.getRating()));
-                colNames.add("\" and age<=\"");
+            }
+            if (isRestaurant || isShopping) {
+                colNames.add(questionnaire.isOver21() ? "\" and age=\"" : "\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
-             }
-             else {
-                colNames.add(TYPE);
-                colValues.add(questionnaire.getCategory());
-                colNames.add("\" and cuisine=\"");
-                colValues.add(questionnaire.getCuisine());
-                colNames.add(PRICE);
-                colValues.add(String.valueOf(price));
-                colNames.add(RATING);
-                colValues.add(String.valueOf(questionnaire.getRating()));
-                colNames.add("\" and age=\"");
-                colValues.add(String.valueOf(questionnaire.getAge()));
-             }
-          }
-          else if (questionnaire.getCategory().equals("shopping")) {
-             if (questionnaire.isOver21()) {
-                colNames.add(TYPE);
-                colValues.add(questionnaire.getCategory());
-                colNames.add(PRICE);
-                colValues.add(String.valueOf(price));
-                colNames.add(RATING);
-                colValues.add(String.valueOf(questionnaire.getRating()));
-                colNames.add("\" and age<=\"");
-                colValues.add(String.valueOf(questionnaire.getAge()));
-             }
-             else {
-                colNames.add(TYPE);
-                colValues.add(questionnaire.getCategory());
-                colNames.add(PRICE);
-                colValues.add(String.valueOf(price));
-                colNames.add(RATING);
-                colValues.add(String.valueOf(questionnaire.getRating()));
-                colNames.add("\" and age=\"");
-                colValues.add(String.valueOf(questionnaire.getAge()));
-             }
-          }
-          else {
-                colNames.add(TYPE);
-                colValues.add(questionnaire.getCategory());
-                colNames.add(PRICE);
-                colValues.add(String.valueOf(price));
-                colNames.add(RATING);
-                colValues.add(String.valueOf(questionnaire.getRating()));
+            }
 
-          }
-          String query = createQuery(colNames, colValues);
-          rs = stmt.executeQuery(query);
+            colNames.add(PRICE);
+            colValues.add(String.valueOf(price));
+            colNames.add(RATING);
+            colValues.add(String.valueOf(questionnaire.getRating()));
 
-          while (!rs.next() && colNames.size() > 1) {
-             colNames.remove(colNames.size() - 1);
-             colValues.remove(colValues.size() - 1);
-             query = createQuery(colNames, colValues);
-             rs.close();
-             rs = stmt.executeQuery(query);
-          }
+            String query = createQuery(colNames, colValues);
+            rs = stmt.executeQuery(query);
+
+            while (!rs.next() && colNames.size() > 1) {
+                colNames.remove(colNames.size() - 1);
+                colValues.remove(colValues.size() - 1);
+                query = createQuery(colNames, colValues);
+                rs.close();
+                rs = stmt.executeQuery(query);
+            }
 
             MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
 
@@ -145,20 +106,20 @@ public class ResultController {
                 count++;
             }
 
-             double rlat = 0.0;
-             double rlong = 0.0;
-             double qlong = 0.0;
-             double qlat = 0.0;
-             double distance =0.0;
+            double rlat = 0.0;
+            double rlong = 0.0;
+            double qlong = 0.0;
+            double qlat = 0.0;
+            double distance = 0.0;
 
-             qlat = questionnaire.getLatitude();
-             qlong = questionnaire.getLongitude();
+            qlat = questionnaire.getLatitude();
+            qlong = questionnaire.getLongitude();
 
-             for (int i = 0; i< count; i++){
-                 rlat = r[i].getLatitude();
-                 rlong = r[i].getLongitude();
-                 distance = calculateDistance(rlat,rlong,qlat,qlong);
-                 r[i].setDistance(distance);
+            for (int i = 0; i < count; i++) {
+                rlat = r[i].getLatitude();
+                rlong = r[i].getLongitude();
+                distance = calculateDistance(rlat, rlong, qlat, qlong);
+                r[i].setDistance(distance);
             }
 
             Arrays.sort(r, new SortByDistance());
@@ -190,17 +151,17 @@ public class ResultController {
             } catch (Exception e) { /* ignored */ }
         }
     }
-    public double calculateDistance(double lat1, double long1, double lat2, double long2){
+    public double calculateDistance(double lat1, double long1, double lat2, double long2) {
 
         int earthRadiusMi = 3959;
         //function sourced from stack overflow
         //it calculates linear distance between two specified coordinates
-        double dLat = degreesToRadians(lat2-lat1);
-        double dLon = degreesToRadians(long2-long1);
+        double dLat = degreesToRadians(lat2 - lat1);
+        double dLon = degreesToRadians(long2 - long1);
         double latitude1 = degreesToRadians(lat1);
         double latitude2 = degreesToRadians(lat2);
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(latitude1) * Math.cos(latitude2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(latitude1) * Math.cos(latitude2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return earthRadiusMi * c;
     }
@@ -209,14 +170,14 @@ public class ResultController {
 
     }
 
-    private String createQuery(ArrayList<String> colNames, ArrayList<String> colValues) {
-         StringBuilder query = new StringBuilder();
-         for (int i = 0; i < colNames.size(); i++) {
-             query.append(colNames.get(i));
-             query.append(colValues.get(i));
-         }
+    private String createQuery(ArrayList < String > colNames, ArrayList < String > colValues) {
+        StringBuilder query = new StringBuilder();
+        for (int i = 0; i < colNames.size(); i++) {
+            query.append(colNames.get(i));
+            query.append(colValues.get(i));
+        }
 
-         query.append("\"");
-         return query.toString();
+        query.append("\"");
+        return query.toString();
     }
 }
