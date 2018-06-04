@@ -79,7 +79,7 @@ public class ResultController {
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
-                
+
                 rs = getResultSet(colNames, colValues, stmt);
 
              }
@@ -94,7 +94,7 @@ public class ResultController {
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
-                
+
                 rs = getResultSet(colNames, colValues, stmt);
              }
           }
@@ -136,19 +136,19 @@ public class ResultController {
           }
 
             MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
-            
+
             int count = 0;
             Result[] r = new Result[5];
             while (rs.next() && count < 5) {
                 r[count] = (new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8)));
                 count++;
             }
-            
+
              double rlat, rlong, qlong, qlat, distance;
-             
+
              qlat = questionnaire.getLatitude();
              qlong = questionnaire.getLongitude();
-             
+
              for (int i = 0; i< count; i++){
                  rlat = r[i].getLatitude();
                  rlong = r[i].getLongitude();
@@ -157,7 +157,7 @@ public class ResultController {
             }
 
             Arrays.sort(r, new SortByDistance());
-            
+
             return multR.results(r).build();
         } catch (Exception e) {
             Result[] r = new Result[1];
@@ -186,22 +186,22 @@ public class ResultController {
         }
     }
     public double calculateDistance(double lat1, double long1, double lat2, double long2){
-        
+
         int earthRadiusMi = 3959;
         //function sourced from stack overflow
         //it calculates linear distance between two specified coordinates
         double dLat = degreesToRadians(lat2-lat1);
         double dLon = degreesToRadians(long2-long1);
         double latitude1 = degreesToRadians(lat1);
-        double latitude2 = degreesToRadians(lat2);        
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(latitude1) * Math.cos(latitude2); 
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-        
+        double latitude2 = degreesToRadians(lat2);
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(latitude1) * Math.cos(latitude2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
         return earthRadiusMi * c;
     }
     public static double degreesToRadians(double degrees) {
         return degrees * Math.PI / 180;
-    
+
     }
 
     private String createQuery(ArrayList<String> colNames, ArrayList<String> colValues) {
@@ -215,14 +215,20 @@ public class ResultController {
 
     private ResultSet getResultSet(ArrayList<String> colNames, ArrayList<String> colValues, Statement stmt) throws Exception {
         String query = createQuery(colNames, colValues);
-        ResultSet rs = stmt.executeQuery(query);
-        while (!rs.next() && colNames.size() > 1) {
-           colNames.remove(colNames.size() - 1);
-           colValues.remove(colValues.size() - 1);
-           query = createQuery(colNames, colValues);
-           rs = stmt.executeQuery(query);
+        ResultSet rs = null;
+        try {
+           while (!rs.next() && colNames.size() > 1) {
+              colNames.remove(colNames.size() - 1);
+              colValues.remove(colValues.size() - 1);
+              query = createQuery(colNames, colValues);
+              rs = stmt.executeQuery(query);
+           }
+           return rs;
+        } catch (Exception e) {
+            throw new Exception();
+        } finally {
+            closeConnections(rs, null, null);
         }
 
-        return rs; 
     }
 }
