@@ -85,7 +85,7 @@ public class ResultController {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = pstmt.executeQuery(query);
+                   rs = stmt.executeQuery(query);
                 }                
 
              }
