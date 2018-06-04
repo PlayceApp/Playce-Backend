@@ -51,14 +51,14 @@ public class ResultController {
     @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
     public MultipleResults generateResults(@RequestBody Questionnaire questionnaire) {
         Connection con = null;
-        PreparedStatement pstmt = null;
+        Statement stmt = null;
         ResultSet rs = null;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(
                 "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");
-            pstmt = con.createStatement(query);
+            stmt = con.createStatement();
             int price = questionnaire.getPrice().length();
 
           String query = "";
@@ -77,16 +77,16 @@ public class ResultController {
                 colNames.add("\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
                 
-                query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaire.getCuisine() + "\" and age<=\"" + questionnaire.getAge() + "\" and type=\"" + questionnaire.getCategory() + "\" and rating>=\"" + questionnaire.getRating() + "\"";
+                //query = "select * from playces where price<=\"" + price + "\" and cuisine=\"" + questionnaire.getCuisine() + "\" and age<=\"" + questionnaire.getAge() + "\" and type=\"" + questionnaire.getCategory() + "\" and rating>=\"" + questionnaire.getRating() + "\"";
 
-                //query = createQuery(colNames, colValues);
-                rs = pstmt.executeQuery(query);
-                /*while (!rs.next() && colNames.size() > 1) {
+                query = createQuery(colNames, colValues);
+                rs = stmt.executeQuery(query);
+                while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
                    rs = pstmt.executeQuery(query);
-                }*/                
+                }                
 
              }
              else {
@@ -102,12 +102,12 @@ public class ResultController {
                 colValues.add(String.valueOf(questionnaire.getAge()));
                 
                 query = createQuery(colNames, colValues);
-                rs = pstmt.executeQuery(query);
+                rs = stmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = pstmt.executeQuery(query);
+                   rs = stmt.executeQuery(query);
                 }                
 
              }
@@ -124,12 +124,12 @@ public class ResultController {
                 colValues.add(String.valueOf(questionnaire.getAge()));
 
                 query = createQuery(colNames, colValues);
-                rs = pstmt.executeQuery(query);
+                rs = stmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = pstmt.executeQuery(query);
+                   rs = stmt.executeQuery(query);
                 }
 
              }
@@ -144,12 +144,12 @@ public class ResultController {
                 colValues.add(String.valueOf(questionnaire.getAge()));
 
                 query = createQuery(colNames, colValues);
-                rs = pstmt.executeQuery(query);
+                rs = stmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = pstmt.executeQuery(query);
+                   rs = stmt.executeQuery(query);
                 }
 
              }
@@ -163,12 +163,12 @@ public class ResultController {
                 colValues.add(String.valueOf(questionnaire.getRating()));
 
                 query = createQuery(colNames, colValues);
-                rs = pstmt.executeQuery(query);
+                rs = stmt.executeQuery(query);
                 while (!rs.next() && colNames.size() > 1) {
                    colNames.remove(colNames.size() - 1);
                    colValues.remove(colValues.size() - 1);
                    query = createQuery(colNames, colValues);
-                   rs = pstmt.executeQuery(query);
+                   rs = stmt.executeQuery(query);
                 }
 
           }
@@ -202,18 +202,18 @@ public class ResultController {
             r[0] = new Result(e.toString(), 0, 0, ADDRESS_NOT_GIVEN, NO_TYPE_GIVEN, 0, 0);
             return new MultipleResults(r);
         } finally {
-            closeConnections(rs, pstmt, con);
+            closeConnections(rs, stmt, con);
         }
     }
-    private void closeConnections(ResultSet rs, PreparedStatement pstmt, Connection con) {
+    private void closeConnections(ResultSet rs, Statement stmt, Connection con) {
         if (rs != null) {
             try {
                 rs.close();
             } catch (Exception e) { /* ignored */ }
         }
-        if (pstmt != null) {
+        if (stmt != null) {
             try {
-                pstmt.close();
+                stmt.close();
             } catch (Exception e) { /* ignored */ }
         }
         if (con != null) {
