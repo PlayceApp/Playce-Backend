@@ -17,6 +17,9 @@ import java.util.*;
 public class ResultController {
    private static final String ADDRESS_NOT_GIVEN = "Address not given";
    private static final String NO_TYPE_GIVEN = "No type given";
+   private static final String TYPE = "select * from playces where type=\"";
+   private static final String PRICE = "\" and price<=\"";
+   private static final String RATING = "\" and rating>=\"";
 
     @RequestMapping("/result")
     public Result generateResult(@RequestParam(value = "name", defaultValue = "Firestone Grill") String name) {
@@ -66,13 +69,16 @@ public class ResultController {
           ArrayList<String> colValues = new ArrayList<String>();
           if (questionnaire.getCategory().equals("restaurant")) {
              if (questionnaire.isOver21()) {
-                colNames.add("select * from playces where type=\"");
+                //colNames.add("select * from playces where type=\"");
+                colNames.add(TYPE);
                 colValues.add(questionnaire.getCategory());
                 colNames.add("\" and cuisine=\"");
                 colValues.add(questionnaire.getCuisine());
-                colNames.add("\" and price<=\"");
+                //colNames.add("\" and price<=\"");
+                colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
-                colNames.add("\" and rating>=\"");
+                //colNames.add("\" and rating>=\"");
+                colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
@@ -92,9 +98,11 @@ public class ResultController {
                 colValues.add(questionnaire.getCategory());
                 colNames.add("\" and cuisine=\"");
                 colValues.add(questionnaire.getCuisine());
-                colNames.add("\" and price<=\"");
+                //colNames.add("\" and price<=\"");
+                ColNames.add(PRICE);
                 colValues.add(String.valueOf(price));
-                colNames.add("\" and rating>=\"");
+                //colNames.add("\" and rating>=\"");
+                colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
@@ -114,9 +122,11 @@ public class ResultController {
              if (questionnaire.isOver21()) {
                 colNames.add("select * from playces where type=\"");
                 colValues.add(questionnaire.getCategory());
-                colNames.add("\" and price<=\"");
+                //colNames.add("\" and price<=\"");
+                colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
-                colNames.add("\" and rating>=\"");
+                //colNames.add("\" and rating>=\"");
+                colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age<=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
@@ -134,9 +144,11 @@ public class ResultController {
              else {
                 colNames.add("select * from playces where type=\"");
                 colValues.add(questionnaire.getCategory());
-                colNames.add("\" and price<=\"");
+                //colNames.add("\" and price<=\"");
+                colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
-                colNames.add("\" and rating>=\"");
+                //colNames.add("\" and rating>=\"");
+                colNames.add(RATING;
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
@@ -155,9 +167,11 @@ public class ResultController {
           else {
                 colNames.add("select * from playces where type=\"");
                 colValues.add(questionnaire.getCategory());
-                colNames.add("\" and price<=\"");
+                colNames.add(PRICE);
+                //colNames.add("\" and price<=\"");
                 colValues.add(String.valueOf(price));
-                colNames.add("\" and rating>=\"");
+                //colNames.add("\" and rating>=\"");
+                colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
 
                 query = createQuery(colNames, colValues);
@@ -202,7 +216,6 @@ public class ResultController {
             return new MultipleResults(r);
         } finally {
             closeConnections(rs, stmt, con);
-            return new MultipleResults(r);
         }
     }
     private void closeConnections(ResultSet rs, Statement stmt, Connection con) {

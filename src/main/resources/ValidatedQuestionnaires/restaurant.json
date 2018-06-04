@@ -1,11 +1,11 @@
 {
    "options": {
-      "start": "Cuisine"
+      "start": "cuisine"
    },
    "questions": {
-      "Cuisine": {
+      "cuisine": {
          "question": "What kind of cuisine are you looking for?",
-         "shorthand": "Cuisine",
+         "shorthand": "cuisine",
          "answers": [
             {
                "answer": "American",
@@ -60,22 +60,49 @@
          "answers": [
             {
                "answer": "1",
-               "next": "is21"
+               "next": "rating"
             },
             {
                "answer": "2",
-               "next": "is21"
+               "next": "rating"
             },
             {
                "answer": "3",
-               "next": "is21"
+               "next": "rating"
             },
             {
                "answer": "4",
-               "next": "is21"
+               "next": "rating"
             },
             {
                "answer": "5+",
+               "next": "rating"
+            }
+         ],
+         "view": "MultiChoiceView"
+      },
+      "rating": {
+         "question": "What's the minimum rating you'd prefer?",
+         "shorthand": "rating",
+         "answers": [
+            {
+               "answer": 1.0,
+               "next": "is21"
+            },
+            {
+               "answer": 2.0,
+               "next": "is21"
+            },
+            {
+               "answer": 3.0,
+               "next": "is21"
+            },
+            {
+               "answer": 4.0,
+               "next": "is21"
+            },
+            {
+               "answer": 5.0,
                "next": "is21"
             }
          ],
@@ -102,19 +129,19 @@
          "answers": [
             {
                "answer": "< 1 Mile",
-               "next": "Price"
+               "next": "price"
             },
             {
                "answer": "1-5 Miles",
-               "next": "Price"
+               "next": "price"
             },
             {
                "answer": "5-10 Miles",
-               "next": "Price"
+               "next": "price"
             },
             {
                "answer": "10+ Miles",
-               "next": "Price"
+               "next": "price"
             }
          ],
          "view": "MultiChoiceView"
@@ -149,9 +176,9 @@
          ],
          "view": "MultiChoiceView"
       },
-      "Price": {
+      "price": {
          "question": "How much money are you looking to spend?",
-         "shorthand": "Price",
+         "shorthand": "price",
          "answers": [
             {
                "answer": "$",
