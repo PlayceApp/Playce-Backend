@@ -263,14 +263,16 @@ public class ResultController {
          return query + "\"";
     }
 
-    private ResultSet getResultSet(ArrayList<String> colNames, ArrayList<String> colValues, Statement stmt) {
-        String query = createQuery(colnames, colValues);
+    private ResultSet getResultSet(ArrayList<String> colNames, ArrayList<String> colValues, Statement stmt) throws Exception {
+        String query = createQuery(colNames, colValues);
         ResultSet rs = stmt.executeQuery(query);
         while (!rs.next() && colNames.size() > 1) {
            colNames.remove(colNames.size() - 1);
-           colValues.remove(colValue.size() - 1);
+           colValues.remove(colValues.size() - 1);
            query = createQuery(colNames, colValues);
            rs = stmt.executeQuery(query);
-        } 
+        }
+
+        return rs; 
     }
 }
