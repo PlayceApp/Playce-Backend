@@ -99,7 +99,7 @@ public class ResultController {
                 colNames.add("\" and cuisine=\"");
                 colValues.add(questionnaire.getCuisine());
                 //colNames.add("\" and price<=\"");
-                ColNames.add(PRICE);
+                colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
                 //colNames.add("\" and rating>=\"");
                 colNames.add(RATING);
@@ -148,7 +148,7 @@ public class ResultController {
                 colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
                 //colNames.add("\" and rating>=\"");
-                colNames.add(RATING;
+                colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
@@ -255,11 +255,22 @@ public class ResultController {
     }
 
     private String createQuery(ArrayList<String> colNames, ArrayList<String> colValues) {
-          String query = "";
-          for (int i = 0; i < colNames.size(); i++) {
-              query += colNames.get(i) + colValues.get(i);
-          }
+         String query = "";
+         for (int i = 0; i < colNames.size(); i++) {
+             query += colNames.get(i) + colValues.get(i);
+         }
 
-          return query + "\"";
+         return query + "\"";
+    }
+
+    private ResultSet getResultSet(ArrayList<String> colNames, ArrayList<String> colValues, Statement stmt) {
+        String query = createQuery(colnames, colValues);
+        ResultSet rs = stmt.executeQuery(query);
+        while (!rs.next() && colNames.size() > 1) {
+           colNames.remove(colNames.size() - 1);
+           colValues.remove(colValue.size() - 1);
+           query = createQuery(colNames, colValues);
+           rs = stmt.executeQuery(query);
+        } 
     }
 }
