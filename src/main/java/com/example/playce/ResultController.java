@@ -198,9 +198,11 @@ public class ResultController {
         } catch (Exception e) {
             Result[] r = new Result[1];
             r[0] = new Result(e.toString(), 0, 0, ADDRESS_NOT_GIVEN, NO_TYPE_GIVEN, 0, 0);
+            closeConnections(rs, stmt, con);
             return new MultipleResults(r);
         } finally {
             closeConnections(rs, stmt, con);
+            return new MultipleResults(r);
         }
     }
     private void closeConnections(ResultSet rs, Statement stmt, Connection con) {
