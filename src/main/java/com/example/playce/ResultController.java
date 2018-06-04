@@ -58,6 +58,7 @@ public class ResultController {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(
                 "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");
+            pstmt = con.createStatement(query);
             int price = questionnaire.getPrice().length();
 
           String query = "";
