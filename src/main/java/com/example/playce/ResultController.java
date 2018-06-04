@@ -99,7 +99,7 @@ public class ResultController {
                 colNames.add("\" and cuisine=\"");
                 colValues.add(questionnaire.getCuisine());
                 //colNames.add("\" and price<=\"");
-                ColNames.add(PRICE);
+                colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
                 //colNames.add("\" and rating>=\"");
                 colNames.add(RATING);
@@ -148,7 +148,7 @@ public class ResultController {
                 colNames.add(PRICE);
                 colValues.add(String.valueOf(price));
                 //colNames.add("\" and rating>=\"");
-                colNames.add(RATING;
+                colNames.add(RATING);
                 colValues.add(String.valueOf(questionnaire.getRating()));
                 colNames.add("\" and age=\"");
                 colValues.add(String.valueOf(questionnaire.getAge()));
