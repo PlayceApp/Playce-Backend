@@ -12,6 +12,9 @@ public class Questionnaire {
     private String activitiesOver21;
     private String price;
     private String useRating;
+    private String activeActivities;
+    private String inactiveActivities;
+    private String inOrOutdoor;
 
     public Questionnaire(
           String category,
@@ -24,7 +27,11 @@ public class Questionnaire {
           double longitude,
           String activitiesOver21,
           String price,
-          String useRating) {
+          String useRating,
+          String activeActivities,
+          String inactiveActivities,
+          String inOrOutdoor
+          ) {
         this.category = category;
         this.distance = distance;
         this.shouldShowAgeRestricted = shouldShowAgeRestricted;
@@ -36,6 +43,9 @@ public class Questionnaire {
         this.longitude = longitude;
         this.useRating = useRating;
         this.price = price;
+        this.activeActivities = activeActivities;
+        this.inactiveActivities = inactiveActivities;
+        this.inOrOutdoor = inOrOutdoor;
     }
 
     public String getCategory() {
@@ -80,5 +90,17 @@ public class Questionnaire {
 
     public String getUseRating() {
        return this.useRating;
+    }
+
+    public String getActiveActivities() {
+       return this.activeActivities;
+    }
+
+    public String getInactiveActivities() {
+       return this.inactiveActivities;
+    }
+
+    public String getInOrOutdoor() {
+       return this.inOrOutdoor;
     }
 }

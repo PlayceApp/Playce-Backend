@@ -58,7 +58,8 @@ public class ResultController {
         ResultSet rs = null;
         ArrayList < String > colNames = new ArrayList < > ();
         ArrayList < String > colValues = new ArrayList < > ();
-        int price = questionnaire.getPrice().length();
+        String priceString = questionnaire.getPrice();
+        int price = priceString != null ? priceString.length() : 0;
         boolean isRestaurant = questionnaire.getCategory().equals("restaurant");
         boolean isShopping = questionnaire.getCategory().equals("shopping");
         boolean isRecreation = questionnaire.getCategory().equals("recreation");
@@ -68,6 +69,9 @@ public class ResultController {
         String specialty = questionnaire.getSpecialty();
         String ethnicity = questionnaire.getEthnicity();
         boolean useRating = questionnaire.getUseRating() == "Yes";
+
+        String activeActivities = questionnaire.getActiveActivities();
+        String inactiveActivities = questionnaire.getInactiveActivities();
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -83,16 +87,16 @@ public class ResultController {
                 colValues.add(activitiesOver21 != null ? activitiesOver21 : restaurantType);
                 colNames.add("\" and subsubcategory=\"");
                 colValues.add(specialty != null ? specialty : ethnicity);
+               colNames.add(PRICE);
+               colValues.add(Integer.toString(price));
+            }
+            if (isRecreation) {
+                colNames.add("\" and subcategory=\"");
+                colValues.add(activeActivities != null ? activeActivities : inactiveActivities);
             }
             if (isShopping) {
                //TODO;
             }
-            if (isRecreation) {
-               //TODO;
-            }
-
-            colNames.add(PRICE);
-            colValues.add(Integer.toString(price));
 
             if (useRating) {
                 colNames.add("\" sort by rating;\"");
