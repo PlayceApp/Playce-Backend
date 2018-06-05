@@ -72,6 +72,7 @@ public class ResultController {
 
         String activeActivities = questionnaire.getActiveActivities();
         String inactiveActivities = questionnaire.getInactiveActivities();
+        String shoppingCategories = questionnaire.getShoppingCategories();
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -95,12 +96,13 @@ public class ResultController {
                 colValues.add(activeActivities != null ? activeActivities : inactiveActivities);
             }
             if (isShopping) {
-               //TODO;
+                colNames.add("\" and subsubcategory=\"");
+                colValues.add(specialty != null ? specialty : ethnicity);
             }
 
             if (useRating) {
                 colNames.add("\" sort by rating;\"");
-                colValues.add("EMPTY");
+                colValues.add(shoppingCategories);
             }
 
             String query = createQuery(colNames, colValues);

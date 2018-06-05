@@ -15,6 +15,7 @@ public class Questionnaire {
     private String activeActivities;
     private String inactiveActivities;
     private String inOrOutdoor;
+    private String shoppingCategories;
 
     public Questionnaire(
           String category,
@@ -30,7 +31,8 @@ public class Questionnaire {
           String useRating,
           String activeActivities,
           String inactiveActivities,
-          String inOrOutdoor
+          String inOrOutdoor,
+          String shoppingCategories
           ) {
         this.category = category;
         this.distance = distance;
@@ -46,6 +48,7 @@ public class Questionnaire {
         this.activeActivities = activeActivities;
         this.inactiveActivities = inactiveActivities;
         this.inOrOutdoor = inOrOutdoor;
+        this.shoppingCategories = shoppingCategories;
     }
 
     public String getCategory() {
@@ -102,5 +105,9 @@ public class Questionnaire {
 
     public String getInOrOutdoor() {
        return this.inOrOutdoor;
+    }
+
+    public String getShoppingCategories() {
+       return this.shoppingCategories;
     }
 }

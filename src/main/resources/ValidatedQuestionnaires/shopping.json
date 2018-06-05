@@ -9,29 +9,33 @@
          "answers": [
              {
                 "answer": "I'm scared",
-                 "next": "subcategories"
+                 "next": "shoppingCategories"
              },
              {
                  "answer": "No.",
-                 "next": "subcategories"
+                 "next": "shoppingCategories"
              },
              {
                  "answer": "Yeet",
-                 "next": "subcategories"
+                 "next": "shoppingCategories"
              },
              {
                  "answer": "Absolutely",
-                 "next": "subcategories"
+                 "next": "shoppingCategories"
              }
          ],
          "view": "MultiChoiceView"
       },
-      "subcategories": {
+      "shoppingCategories": {
          "question": "I don't really care. Pick a category.",
-         "shorthand": "Price",
+         "shorthand": "shoppingCategories",
          "answers": [
             {
                "answer": "Store",
+               "next": ""
+            },
+             {
+               "answer": "Department",
                "next": ""
             },
             {
