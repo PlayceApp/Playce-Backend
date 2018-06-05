@@ -19,7 +19,6 @@ public class ResultController {
     private static final String ADDRESS_NOT_GIVEN = "Address not given";
     private static final String NO_TYPE_GIVEN = "No type given";
     private static final String SELECT_WHERE_CATEGORY_IS = "select * from playces where category=\"";
-    private static final String PRICE = "\" and price<=\"";
 
     @RequestMapping("/result")
     public Result generateResult(@RequestParam(value = "name", defaultValue = "Firestone Grill") String name) {
@@ -84,12 +83,7 @@ public class ResultController {
             colValues.add(questionnaire.getCategory());
 
             if (isRestaurant) {
-                colNames.add("\" and subcategory=\"");
-                colValues.add(activitiesOver21 != null ? activitiesOver21 : restaurantType);
-                colNames.add("\" and subsubcategory=\"");
-                colValues.add(specialty != null ? specialty : ethnicity);
-               colNames.add(PRICE);
-               colValues.add(Integer.toString(price));
+               parseRestaurants(colNames, colValues, activitiesOver21, restaurantType, specialty, ethnicity, price);
             }
             if (isRecreation) {
                 colNames.add("\" and subcategory=\"");
@@ -135,6 +129,23 @@ public class ResultController {
             closeConnections(rs, stmt, con);
         }
     }
+
+    private void parseRestaurants(
+          ArrayList colNames,
+          ArrayList colValues,
+          String activitiesOver21,
+          String restaurantType,
+          String specialty,
+          String ethnicity,
+          int price) {
+          colNames.add("\" and subcategory=\"");
+          colValues.add(activitiesOver21 != null ? activitiesOver21 : restaurantType);
+          colNames.add("\" and subsubcategory=\"");
+          colValues.add(specialty != null ? specialty : ethnicity);
+         colNames.add("\" and price<=\"");
+         colValues.add(Integer.toString(price));
+    }
+
     private void closeConnections(ResultSet rs, Statement stmt, Connection con) {
         if (rs != null) {
             try {
