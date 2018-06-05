@@ -18,13 +18,12 @@ import java.util.*;
 public class ResultController {
     private static final String ADDRESS_NOT_GIVEN = "Address not given";
     private static final String NO_TYPE_GIVEN = "No type given";
-    private static final String TYPE = "select * from playces where type=\"";
+    private static final String SELECT_WHERE_CATEGORY_IS = "select * from playces where category=\"";
     private static final String PRICE = "\" and price<=\"";
-    private static final String RATING = "\" and rating>=\"";
 
     @RequestMapping("/result")
     public Result generateResult(@RequestParam(value = "name", defaultValue = "Firestone Grill") String name) {
-        return new Result(name, 1, 1, ADDRESS_NOT_GIVEN, "no category", 35.2862, -120.654);
+        return new Result(name, 1, 1, ADDRESS_NOT_GIVEN, 35.2862, -120.654, "No category");
     }
 
     @RequestMapping("/getPlayceResult")
@@ -44,9 +43,9 @@ public class ResultController {
 
             rs = pstmt.executeQuery();
             rs.next();
-            return new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8));
+            return new Result(rs.getString(1), rs.getInt(2), rs.getDouble(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getString(7));
         } catch (Exception e) {
-            return new Result(e.toString(), 0, 0, ADDRESS_NOT_GIVEN, NO_TYPE_GIVEN, 0, 0);
+            return new Result(e.toString(), 0, 0, ADDRESS_NOT_GIVEN, 0, 0, NO_TYPE_GIVEN);
         } finally {
             closeConnections(rs, pstmt, con);
         }
@@ -62,6 +61,13 @@ public class ResultController {
         int price = questionnaire.getPrice().length();
         boolean isRestaurant = questionnaire.getCategory().equals("restaurant");
         boolean isShopping = questionnaire.getCategory().equals("shopping");
+        boolean isRecreation = questionnaire.getCategory().equals("recreation");
+
+        String activitiesOver21 = questionnaire.getActivitiesOver21();
+        String restaurantType = questionnaire.getRestaurantType();
+        String specialty = questionnaire.getSpecialty();
+        String ethnicity = questionnaire.getEthnicity();
+        boolean useRating = questionnaire.getUseRating() == "Yes";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -69,22 +75,29 @@ public class ResultController {
                 "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_3cf2d9a2c001143?reconnect=true", "bd9b14204c0c56", "2daf5b5d");
             stmt = con.createStatement();
 
-            colNames.add(TYPE);
+            colNames.add(SELECT_WHERE_CATEGORY_IS);
             colValues.add(questionnaire.getCategory());
 
             if (isRestaurant) {
-                colNames.add("\" and cuisine=\"");
-                colValues.add(questionnaire.getCuisine());
+                colNames.add("\" and subcategory=\"");
+                colValues.add(activitiesOver21 != null ? activitiesOver21 : restaurantType);
+                colNames.add("\" and subsubcategory=\"");
+                colValues.add(specialty != null ? specialty : ethnicity);
             }
-            if (isRestaurant || isShopping) {
-                colNames.add(questionnaire.isOver21() ? "\" and age=\"" : "\" and age<=\"");
-                colValues.add(String.valueOf(questionnaire.getAge()));
+            if (isShopping) {
+               //TODO;
+            }
+            if (isRecreation) {
+               //TODO;
             }
 
             colNames.add(PRICE);
-            colValues.add(String.valueOf(price));
-            colNames.add(RATING);
-            colValues.add(String.valueOf(questionnaire.getRating()));
+            colValues.add(Integer.toString(price));
+
+            if (useRating) {
+                colNames.add("\" sort by rating;\"");
+                colValues.add("EMPTY");
+            }
 
             String query = createQuery(colNames, colValues);
             rs = stmt.executeQuery(query);
@@ -100,34 +113,16 @@ public class ResultController {
             MultipleResults.MultipleResultsBuilder multR = MultipleResults.builder();
 
             int count = 0;
-            Result[] r = new Result[5];
-            while (rs.next() && count < 5) {
-                r[count] = (new Result(rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8)));
+            Result[] r = new Result[20];
+            while (rs.next() && count < 20) {
+                r[count] = (new Result(rs.getString(1), rs.getInt(2), rs.getDouble(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getString(7)));
                 count++;
             }
-
-            double rlat = 0.0;
-            double rlong = 0.0;
-            double qlong = 0.0;
-            double qlat = 0.0;
-            double distance = 0.0;
-
-            qlat = questionnaire.getLatitude();
-            qlong = questionnaire.getLongitude();
-
-            for (int i = 0; i < count; i++) {
-                rlat = r[i].getLatitude();
-                rlong = r[i].getLongitude();
-                distance = calculateDistance(rlat, rlong, qlat, qlong);
-                r[i].setDistance(distance);
-            }
-
-            Arrays.sort(r, new SortByDistance());
 
             return multR.results(r).build();
         } catch (Exception e) {
             Result[] r = new Result[1];
-            r[0] = new Result(e.toString(), 0, 0, ADDRESS_NOT_GIVEN, NO_TYPE_GIVEN, 0, 0);
+            r[0] = new Result(e.toString(), 0, 0, ADDRESS_NOT_GIVEN, 0, 0, NO_TYPE_GIVEN);
             closeConnections(rs, stmt, con);
             return new MultipleResults(r);
         } finally {

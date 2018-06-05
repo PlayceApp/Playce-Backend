@@ -1,57 +1,84 @@
 package com.example.playce;
 
 public class Questionnaire {
-    
-    private final String price;
-    private final String category;
-    private final double rating;
-    private final double latitude;
-    private final double longitude;
-    private final String cuisine;
-    private final String is21;
-  
-    public Questionnaire(String price, String category, double rating, double latitude, double longitude, String cuisine, String is21) {
-        this.price = price;
+    private String category;
+    private String distance;
+    private String shouldShowAgeRestricted;
+    private String ethnicity;
+    private String specialty;
+    private String restaurantType;
+    private double latitude;
+    private double longitude;
+    private String activitiesOver21;
+    private String price;
+    private String useRating;
+
+    public Questionnaire(
+          String category,
+          String distance,
+          String shouldShowAgeRestricted,
+          String ethnicity,
+          String specialty,
+          String restaurantType,
+          double latitude,
+          double longitude,
+          String activitiesOver21,
+          String price,
+          String useRating) {
         this.category = category;
-        this.rating = rating;
+        this.distance = distance;
+        this.shouldShowAgeRestricted = shouldShowAgeRestricted;
+        this.activitiesOver21 = activitiesOver21;
+        this.restaurantType = restaurantType;
+        this.ethnicity = ethnicity;
+        this.specialty = specialty;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.cuisine = cuisine;
-        this.is21 = is21;
-    }
-
-    public boolean isOver21() {
-       return is21.equals("Yes");
-    }
-
-    public int getAge() {
-       if (is21.equals("Yes")) {
-          return 21; 
-       }
-       return 0;
-    }
-    
-    public String getPrice() {
-        return price;
+        this.useRating = useRating;
+        this.price = price;
     }
 
     public String getCategory() {
-        return category;
+       return this.category;
     }
 
-    public double getRating() {
-        return rating;
+    public String getDistance() {
+       return this.distance;
+    }
+
+    public String getShouldShowAgeRestricted() {
+       return this.shouldShowAgeRestricted;
+    }
+
+    public String getEthnicity() {
+       return this.ethnicity;
+    }
+
+    public String getSpecialty() {
+       return this.specialty;
+    }
+
+    public String getRestaurantType() {
+       return this.restaurantType;
     }
 
     public double getLatitude() {
-        return latitude;
+       return this.latitude;
     }
 
     public double getLongitude() {
-        return longitude;
+       return this.longitude;
     }
 
-    public String getCuisine() {
-        return cuisine;
+    public String getActivitiesOver21() {
+       return this.activitiesOver21;
+    }
+
+    public String getPrice() {
+       return this.price;
+    }
+
+    public String getUseRating() {
+       return this.useRating;
     }
 }
