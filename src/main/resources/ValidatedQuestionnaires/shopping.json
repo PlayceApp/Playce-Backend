@@ -1,49 +1,45 @@
 {
    "options": {
-      "start": "Distance"
+      "start": "preparation"
    },
    "questions": {
-      "Distance": {
-         "question": "How far are you willing to travel?",
-         "shorthand": "Distance",
+      "preparation": {
+         "question": "This questionnaire will be short and sweet. Ready?",
+         "shorthand": "preparation",
          "answers": [
-            {
-               "answer": "< 1 Mile",
-               "next": "Price"
-            },
-            {
-               "answer": "1-5 Miles",
-               "next": "Price"
-            },
-            {
-               "answer": "5-10 Miles",
-               "next": "Price"
-            },
-            {
-               "answer": "10+ Miles",
-               "next": "Price"
-            }
+             {
+                "answer": "I'm scared",
+                 "next": "subcategories"
+             },
+             {
+                 "answer": "No.",
+                 "next": "subcategories"
+             },
+             {
+                 "answer": "Yeet",
+                 "next": "subcategories"
+             },
+             {
+                 "answer": "Absolutely",
+                 "next": "subcategories"
+             }
          ],
          "view": "MultiChoiceView"
       },
-      "Price": {
-         "question": "How much money are you looking to spend?",
+      "subcategories": {
+         "question": "I don't really care. Pick a category.",
          "shorthand": "Price",
          "answers": [
             {
-               "answer": "$",
+               "answer": "Store",
                "next": ""
             },
             {
-               "answer": "$$",
+               "answer": "Clothing",
                "next": ""
             },
             {
-               "answer": "$$$",
-               "next": ""
-            },
-            {
-               "answer": "$$$$",
+               "answer": "Point of Interest",
                "next": ""
             }
          ],
