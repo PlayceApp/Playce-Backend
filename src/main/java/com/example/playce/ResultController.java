@@ -151,6 +151,7 @@ public class ResultController {
             } catch (Exception e) { /* ignored */ }
         }
     }
+
     public double calculateDistance(double lat1, double long1, double lat2, double long2) {
 
         int earthRadiusMi = 3959;
@@ -165,9 +166,9 @@ public class ResultController {
 
         return earthRadiusMi * c;
     }
+
     public static double degreesToRadians(double degrees) {
         return degrees * Math.PI / 180;
-
     }
 
     private String createQuery(ArrayList < String > colNames, ArrayList < String > colValues) {
