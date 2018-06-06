@@ -3,7 +3,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ KMResultControllerTest.class }) 
+@SuiteClasses({ KMResultTest.class, KMResultControllerTest.class }) 
 public class KMTestSuite {
 
 } 
