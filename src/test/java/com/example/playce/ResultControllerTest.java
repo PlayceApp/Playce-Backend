@@ -15,7 +15,7 @@ public class ResultControllerTest {
 	   String playceName = "Urbane Cafe";
 	   
 	   Result expected = new Result("Urbane Cafe", 1, 4.5, 
-	       "925 Higuera St San Luis Obispo CA 93401",35.2809, -120.662, "restaurant");
+	       "952 Higuera St San Luis Obispo CA 93401",35.2809, -120.662, "restaurant");
 	   
 	   Assert.assertTrue(r.generatePlayceResult(playceName).equals(expected));
 	}
