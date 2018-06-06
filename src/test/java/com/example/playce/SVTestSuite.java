@@ -3,7 +3,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ SVResultControllerTest.class }) 
+@SuiteClasses({ SVResultTest.class, SVResultControllerTest.class }) 
 public class SVTestSuite {
 
 } 
