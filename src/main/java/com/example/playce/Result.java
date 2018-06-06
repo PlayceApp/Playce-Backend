@@ -1,5 +1,6 @@
 package com.example.playce;
 import java.util.*;
+import java.lang.Object;
 
 public class Result{
 
@@ -20,6 +21,17 @@ public class Result{
         this.category = category;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public boolean equals(Result r) {
+        return (this.name.equals(r.name)
+                  && this.price == r.price
+                  && this.rating == r.rating
+                  && this.address.equals(r.address)
+                  && this.category.equals(r.category)
+                  && this.latitude == r.latitude
+                  && this.longitude == r.longitude
+                  && this.distance == r.distance);
     }
 
     public String getName() {
