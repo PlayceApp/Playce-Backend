@@ -66,11 +66,8 @@ public class Result{
        return longitude;
     }
     
-    public int compare(Result a, Result b){
-        if (a == null || b == null){
-            if (a == null)
-                return 1;
-            else
+    public int compare(Result r){
+        if (r == null){
                 return -1;
         }
         return a.getName().compareTo(b.getName());
