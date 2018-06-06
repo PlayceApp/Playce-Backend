@@ -65,9 +65,7 @@ public class Result{
     public double getLongitude() {
        return longitude;
     }
-    //implementing a Ccmparetor to sort and overriding the compareTo to compare distances
-}
-class SortByDistance implements Comparator <Result>{
+    
     public int compare(Result a, Result b){
         if (a == null || b == null){
             if (a == null)
@@ -75,13 +73,6 @@ class SortByDistance implements Comparator <Result>{
             else
                 return -1;
         }
-
-        if (a.getDistance() > b.getDistance()){
-            return 1;
-        }else if (a.getDistance() == b.getDistance()){
-            return 0;
-        }else{
-            return -1;
-        }
+        return a.getName().compareTo(b.getName());
     }
 }
