@@ -17,7 +17,7 @@ public class ResultControllerTest {
 	   Result expected = new Result("Urbane Cafe", 1, 4.5, 
 	       "952 Higuera St San Luis Obispo CA 93401",35.2809, -120.662, "restaurant");
 	   
-	   Assert.assertTrue(r.generatePlayceResult(playceName).equals(expected));
+	   Assert.assertTrue(r.generatePlayceResult(playceName).isEqualTo(expected));
 	}
 	
 	@Test
@@ -28,6 +28,6 @@ public class ResultControllerTest {
 	   Result expected = new Result("Raku Ramen", 2, 3.5, 
 	       "1308 Monterey St San Luis Obispo CA 93401",35.2846, -120.657, "restaurant");
 	   
-	   Assert.assertTrue(r.generatePlayceResult(playceName).equals(expected));
+	   Assert.assertTrue(r.generatePlayceResult(playceName).isEqualTo(expected));
 	}
 }

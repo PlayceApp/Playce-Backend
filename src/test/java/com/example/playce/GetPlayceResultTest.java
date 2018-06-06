@@ -17,6 +17,6 @@ public class GetPlayceResultTest {
 	   Result expected = new Result("San Diego Museum Of Arts", 0, 0.0, 
 	       "San Luis Obispo CA 93401 USA",35.2828, -120.66, "recreation");
 	   
-	   Assert.assertTrue(r.generatePlayceResult(playceName).equals(expected));
+	   Assert.assertTrue(r.generatePlayceResult(playceName).isEqualTo(expected));
         }
 }
