@@ -1,5 +1,7 @@
 package com.example.playce;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class Questionnaire {
     private String category;
     private String distance;
@@ -16,40 +18,6 @@ public class Questionnaire {
     private String inactiveActivities;
     private String inOrOutdoor;
     private String shoppingCategories;
-
-    public Questionnaire(
-          String category,
-          String distance,
-          String shouldShowAgeRestricted,
-          String ethnicity,
-          String specialty,
-          String restaurantType,
-          double latitude,
-          double longitude,
-          String activitiesOver21,
-          String price,
-          String useRating,
-          String activeActivities,
-          String inactiveActivities,
-          String inOrOutdoor,
-          String shoppingCategories
-          ) {
-        this.category = category;
-        this.distance = distance;
-        this.shouldShowAgeRestricted = shouldShowAgeRestricted;
-        this.activitiesOver21 = activitiesOver21;
-        this.restaurantType = restaurantType;
-        this.ethnicity = ethnicity;
-        this.specialty = specialty;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.useRating = useRating;
-        this.price = price;
-        this.activeActivities = activeActivities;
-        this.inactiveActivities = inactiveActivities;
-        this.inOrOutdoor = inOrOutdoor;
-        this.shoppingCategories = shoppingCategories;
-    }
 
     public String getCategory() {
        return this.category;
