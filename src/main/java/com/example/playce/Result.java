@@ -70,6 +70,6 @@ public class Result{
         if (r == null){
                 return -1;
         }
-        return a.getName().compareTo(b.getName());
+        return this.name.compareTo(r.getName());
     }
 }
