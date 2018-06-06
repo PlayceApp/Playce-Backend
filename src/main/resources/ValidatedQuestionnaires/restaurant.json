@@ -1,131 +1,146 @@
 {
    "options": {
-      "start": "cuisine"
+      "start": "is21"
    },
    "questions": {
-      "cuisine": {
-         "question": "What kind of cuisine are you looking for?",
-         "shorthand": "cuisine",
-         "answers": [
-            {
-               "answer": "American",
-               "next": "NumPeople"
-            },
-            {
-               "answer": "Chinese",
-               "next": "NumPeople"
-            },
-            {
-               "answer": "German",
-               "next": "NumPeople"
-            },
-            {
-               "answer": "Greek",
-               "next": "NumPeople"
-            },
-            {
-               "answer": "Indian",
-               "next": "NumPeople"
-            },
-            {
-               "answer": "Italian",
-               "next": "NumPeople"
-            },
-            {
-               "answer": "Japanese",
-               "next": "NumPeople"
-            },
-            {
-               "answer": "Mediterranean",
-               "next": "NumPeople"
-            },
-            {
-               "answer": "Mexican",
-               "next": "NumPeople"
-            },
-            {
-               "answer": "Thai",
-               "next": "NumPeople"
-            },
-            {
-               "answer": "Vietnamese",
-               "next": "NumPeople"
-            }
-         ],
-         "view": "MultiChoiceView"
-      },
-      "NumPeople": {
-         "question": "How many people are in your party?",
-         "shorthand": "NumPeople",
-         "answers": [
-            {
-               "answer": "1",
-               "next": "rating"
-            },
-            {
-               "answer": "2",
-               "next": "rating"
-            },
-            {
-               "answer": "3",
-               "next": "rating"
-            },
-            {
-               "answer": "4",
-               "next": "rating"
-            },
-            {
-               "answer": "5+",
-               "next": "rating"
-            }
-         ],
-         "view": "MultiChoiceView"
-      },
-      "rating": {
-         "question": "What's the minimum rating you'd prefer?",
-         "shorthand": "rating",
-         "answers": [
-            {
-               "answer": 1.0,
-               "next": "is21"
-            },
-            {
-               "answer": 2.0,
-               "next": "is21"
-            },
-            {
-               "answer": 3.0,
-               "next": "is21"
-            },
-            {
-               "answer": 4.0,
-               "next": "is21"
-            },
-            {
-               "answer": 5.0,
-               "next": "is21"
-            }
-         ],
-         "view": "MultiChoiceView"
-      },
       "is21": {
-         "question": "Is everyone 21 years old?",
+         "question": "Are you over 21?",
          "shorthand": "is21",
          "answers": [
             {
                "answer": "Yes",
-               "next": "Date"
+               "next": "shouldShowAgeRestricted"
             },
             {
                "answer": "No",
-               "next": "Date"
+               "next": "restaurantType"
             }
          ],
          "view": "MultiChoiceView"
       },
-      "Distance": {
+      "shouldShowAgeRestricted": {
+         "question": "Are you looking for activities over 21?",
+         "shorthand": "shouldShowAgeRestricted",
+         "answers": [
+            {
+               "answer": "Yes",
+               "next": "activitiesOver21"
+            },
+            {
+               "answer": "No",
+               "next": "restaurantType"
+            }
+         ],
+         "view": "MultiChoiceView"
+      },
+      "activitiesOver21": {
+         "question": "What type of adult activity sounds interesting?",
+         "shorthand": "activitiesOver21",
+         "answers": [
+            {
+               "answer": "Bar",
+               "next": "distance"
+            },
+            {
+               "answer": "Liquor Store",
+               "next": "distance"
+            },
+            {
+               "answer": "Night Club",
+               "next": "distance"
+            },
+            {
+               "answer": "Restaurant",
+               "next": "distance"
+            },
+            {
+               "answer": "Point of Interest",
+               "next": "distance"
+            }
+         ],
+         "view": "MultiChoiceView"
+      },
+      "restaurantType": {
+         "question": "What type of place fits your taste?",
+         "shorthand": "restaurantType",
+         "answers": [
+            {
+               "answer": "Fast Food",
+               "next": "ethnicity"
+            },
+            {
+               "answer": "Casual",
+               "next": "ethnicity"
+            },
+            {
+               "answer": "Formal",
+               "next": "ethnicity"
+            },
+            {
+               "answer": "Specialty",
+               "next": "specialty"
+            }
+         ],
+         "view": "MultiChoiceView"
+      },
+      "specialty": {
+         "question": "What type of specialty?",
+         "shorthand": "specialty",
+         "answers": [
+            {
+               "answer": "Bakery",
+               "next": "distance"
+            },
+            {
+               "answer": "Coffee & Tea",
+               "next": "distance"
+            }
+         ],
+         "view": "MultiChoiceView"
+      },
+      "ethnicity": {
+         "question":
+            "Should we find you an ethnicity or just points of interest?",
+         "shorthand": "ethnicity",
+         "answers": [
+            {
+               "answer": "American",
+               "next": "distance"
+            },
+            {
+               "answer": "Mexican",
+               "next": "distance"
+            },
+            {
+               "answer": "Italian",
+               "next": "distance"
+            },
+            {
+               "answer": "Chinese",
+               "next": "distance"
+            },
+            {
+               "answer": "Japanese",
+               "next": "distance"
+            },
+            {
+               "answer": "Indian",
+               "next": "distance"
+            },
+            {
+               "answer": "Mediterranean",
+               "next": "distance"
+            },
+            {
+               "answer": "Point of Interest",
+               "next": "distance"
+            }
+         ],
+         "view": "MultiChoiceView"
+      },
+      "distance": {
          "question": "How far are you willing to travel?",
-         "shorthand": "Distance",
+         "shorthand": "distance",
          "answers": [
             {
                "answer": "< 1 Mile",
@@ -146,54 +161,39 @@
          ],
          "view": "MultiChoiceView"
       },
-      "InOutDoor": {
-         "question": "Would you like to be indoor or outdoor?",
-         "shorthand": "InOutDoor",
-         "answers": [
-            {
-               "answer": "Indoor",
-               "next": "Active"
-            },
-            {
-               "answer": "Outdoor",
-               "next": "Active"
-            }
-         ],
-         "view": "MultiChoiceView"
-      },
-      "Date": {
-         "question": "Is this going to be a date?",
-         "shorthand": "Date",
-         "answers": [
-            {
-               "answer": "Yes",
-               "next": "Distance"
-            },
-            {
-               "answer": "No",
-               "next": "Distance"
-            }
-         ],
-         "view": "MultiChoiceView"
-      },
       "price": {
          "question": "How much money are you looking to spend?",
          "shorthand": "price",
          "answers": [
             {
                "answer": "$",
-               "next": ""
+               "next": "useRating"
             },
             {
                "answer": "$$",
-               "next": ""
+               "next": "useRating"
             },
             {
                "answer": "$$$",
-               "next": ""
+               "next": "useRating"
             },
             {
                "answer": "$$$$",
+               "next": "useRating"
+            }
+         ],
+         "view": "MultiChoiceView"
+      },
+      "useRating": {
+         "question": "Do you care about a place's rating?",
+         "shorthand": "useRating",
+         "answers": [
+            {
+               "answer": "Yes",
+               "next": ""
+            },
+            {
+               "answer": "No",
                "next": ""
             }
          ],

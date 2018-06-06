@@ -1,48 +1,53 @@
 {
    "options": {
-      "start": "Distance"
+      "start": "preparation"
    },
    "questions": {
-
-      "Distance": {
-         "question": "How far are you willing to travel?",
-         "shorthand": "Distance",
+      "preparation": {
+         "question": "This questionnaire will be short and sweet. Ready?",
+         "shorthand": "preparation",
          "answers": [
-            {
-            "answer": "< 1 Mile",
-            "next": "Price"
-            }, {
-            "answer": "1-5 Miles",
-            "next": "Price"
-            }, {
-            "answer": "5-10 Miles",
-            "next": "Price"
-            }, {
-            "answer": "10+ Miles",
-            "next": "Price"
-            }
+             {
+                "answer": "I'm scared",
+                 "next": "shoppingCategories"
+             },
+             {
+                 "answer": "No.",
+                 "next": "shoppingCategories"
+             },
+             {
+                 "answer": "Yeet",
+                 "next": "shoppingCategories"
+             },
+             {
+                 "answer": "Absolutely",
+                 "next": "shoppingCategories"
+             }
          ],
          "view": "MultiChoiceView"
       },
-      "Price": {
-          "question": "How much money are you looking to spend?",
-          "shorthand": "Price",
-          "answers": [
+      "shoppingCategories": {
+         "question": "I don't really care. Pick a category.",
+         "shorthand": "shoppingCategories",
+         "answers": [
+            {
+               "answer": "Store",
+               "next": ""
+            },
              {
-             "answer": "$",
-             "next": ""
-             }, {
-             "answer": "$$",
-             "next": ""
-             }, {
-             "answer": "$$$",
-             "next": ""
-             }, {
-             "answer": "$$$$",
-             "next": ""
-             }
-          ],
-          "view": "MultiChoiceView"
-       }
+               "answer": "Department",
+               "next": ""
+            },
+            {
+               "answer": "Clothing",
+               "next": ""
+            },
+            {
+               "answer": "Point of Interest",
+               "next": ""
+            }
+         ],
+         "view": "MultiChoiceView"
+      }
    }
 }

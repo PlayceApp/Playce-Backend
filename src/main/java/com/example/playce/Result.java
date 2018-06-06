@@ -10,9 +10,9 @@ public class Result{
     private final String category;
     private final double latitude;
     private final double longitude;
-    private double distance; 
+    private double distance;
 
-    public Result(String name, int price, double rating, String address, String category, double latitude, double longitude) {
+    public Result(String name, int price, double rating, String address, double latitude, double longitude, String category) {
         this.name = name;
         this.price = price;
         this.rating = rating;
@@ -53,7 +53,7 @@ public class Result{
     public double getLongitude() {
        return longitude;
     }
-    //implementing a Ccmparetor to sort and overriding the compareTo to compare distances 
+    //implementing a Ccmparetor to sort and overriding the compareTo to compare distances
 }
 class SortByDistance implements Comparator <Result>{
     public int compare(Result a, Result b){
