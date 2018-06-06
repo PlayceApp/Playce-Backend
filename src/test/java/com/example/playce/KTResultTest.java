@@ -22,7 +22,7 @@ public class KTResultTest {
 
 	@Test
 	public void testCompareResults2() {
-	   Result r1 = new Result("Sidecar", 0, 4.4, 
+	   Result r = new Result("Sidecar", 0, 4.4, 
 	       "1127 Broad St San Luis Obispo CA 93401 USA", 35.2784, -120.664, "restaurant");
 	   
 	   Assert.assertTrue(r.compare(r) == 0);

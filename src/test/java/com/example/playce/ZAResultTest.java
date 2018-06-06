@@ -7,7 +7,7 @@ import com.example.playce.Result;
 import com.example.playce.ResultController;
 
 @RunWith(SpringRunner.class)
-public class ZATest {
+public class ZAResultTest {
 
 	@Test
 	public void testCompareResults1() {
