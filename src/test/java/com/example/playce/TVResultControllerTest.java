@@ -26,7 +26,7 @@ public class TVResultControllerTest {
 	   String playceName = "Chick-fil-A";
    
 	   Result expected = new Result("Chick-fil-A", 1, 5.0, 
-	       "1 Grand Ave St San Luis Obispo CA 93407 USA", 35.3005, -120.658, "restaurant");
+	       "1 Grand Ave San Luis Obispo CA 93407", 35.3005, -120.658, "restaurant");
 	   
 	   Assert.assertTrue(r.generatePlayceResult(playceName).isEqualTo(expected));
 	}

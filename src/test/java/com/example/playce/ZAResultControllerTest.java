@@ -15,7 +15,7 @@ public class ZAResultControllerTest {
 	   String playceName = "Big Sky Cafe";
 	   
 	   Result expected = new Result("Big Sky Cafe", 2, 4.4, 
-	       "1121 Broad St San Luis Obispo CA 93401i USA", 35.2784, -120.664, "restaurant");
+	       "1121 Broad St San Luis Obispo CA 93401", 35.2784, -120.664, "restaurant");
 	   
 	   Assert.assertTrue(r.generatePlayceResult(playceName).isEqualTo(expected));
 	}
@@ -26,7 +26,7 @@ public class ZAResultControllerTest {
 	   String playceName = "Woodstock's Pizza SLO";
    
 	   Result expected = new Result("Woodsotck's Pizza SLO", 2, 4.3, 
-	       "1000 Higuera San Luis Obispo CA 93401 USA", 35.2814, -120.661, "restaurant");
+	       "1000 Higuera St San Luis Obispo CA 93401 USA", 35.2814, -120.661, "restaurant");
 	   
 	   Assert.assertTrue(r.generatePlayceResult(playceName).isEqualTo(expected));
 	}
