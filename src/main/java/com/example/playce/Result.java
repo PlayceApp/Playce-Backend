@@ -1,7 +1,6 @@
 package com.example.playce;
 
 import java.util.*;
-import java.lang.*;
 
 public class Result{
 

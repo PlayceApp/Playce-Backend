@@ -164,21 +164,6 @@ public class ResultController {
         }
     }
 
-    private double calculateDistance(double lat1, double long1, double lat2, double long2) {
-
-        int earthRadiusMi = 3959;
-        //fGunction sourced from stack overflow
-        //it calculates linear distance between two specified coordinates
-        double dLat = degreesToRadians(lat2 - lat1);
-        double dLon = degreesToRadians(long2 - long1);
-        double latitude1 = degreesToRadians(lat1);
-        double latitude2 = degreesToRadians(lat2);
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(latitude1) * Math.cos(latitude2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        return earthRadiusMi * c;
-    }
-
     private static double degreesToRadians(double degrees) {
         return degrees * Math.PI / 180;
     }
