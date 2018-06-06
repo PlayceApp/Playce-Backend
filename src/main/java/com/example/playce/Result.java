@@ -24,7 +24,7 @@ public class Result{
         this.longitude = longitude;
     }
 
-    public boolean isEqualTO(Result r) {
+    public boolean isEqualTo(Result r) {
         return (this.name.equals(r.name)
             && this.price == r.price
             && this.rating == r.rating
