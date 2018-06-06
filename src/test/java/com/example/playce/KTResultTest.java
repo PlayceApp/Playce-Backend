@@ -10,7 +10,7 @@ import com.example.playce.ResultController;
 public class KTResultTest {
 
 	@Test
-	public void testGetPlayceResult1() {
+	public void testCompareResults1() {
 	   Result r1 = new Result("San Diego Museum Of Arts", 0, 0.0, 
 	       "San Luis Obispo CA 93401 USA", 35.2828, -120.66, "recreation");
 	   
@@ -21,7 +21,7 @@ public class KTResultTest {
         }
 
 	@Test
-	public void testGetPlayceResult2() {
+	public void testCompareResults2() {
 	   Result r1 = new Result("Sidecar", 0, 4.4, 
 	       "1127 Broad St San Luis Obispo CA 93401 USA", 35.2784, -120.664, "restaurant");
 	   

@@ -10,7 +10,7 @@ import com.example.playce.ResultController;
 public class TVResultTest {
 
 	@Test
-	public void testGetPlayceResult1() {
+	public void testCompareResults1() {
 	   Result r1 = new Result("Firestone Grill", 1, 4.5, 
 	       "1001 Higuera St San Luis Obispo CA 93401 USA", 35.2811, -120.66, "restaurant");
 	   
@@ -21,10 +21,10 @@ public class TVResultTest {
 	}
 	
 	@Test
-	public void testGetPlayceResult2() {
+	public void testCompareResults2() {
 	   Result r = new Result("Chick-fil-A", 1, 5.0, 
 	       "1 Grand Ave San Luis Obispo CA 93407", 35.3005, -120.658, "restaurant");
 	   
-	   Assert.assertTrue(r.compare(r) == 0)
+	   Assert.assertTrue(r.compare(r) == 0);
 	}
 }

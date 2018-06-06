@@ -10,7 +10,7 @@ import com.example.playce.ResultController;
 public class ZATest {
 
 	@Test
-	public void testGetPlayceResult1() {
+	public void testCompareResults1() {
 	   Result r1 = new Result("Big Sky Cafe", 2, 4.4, 
 	       "1121 Broad St San Luis Obispo CA 93401 USA", 35.2784, -120.664, "restaurant");
 	   
@@ -21,7 +21,7 @@ public class ZATest {
 	}
 	
 	@Test
-	public void testGetPlayceResult2() {
+	public void testCompareResults2() {
 	   Result r = new Result("Woodstock's Pizza SLO", 2, 4.3, 
 	       "1000 Higuera St San Luis Obispo CA 93401 USA", 35.2814, -120.661, "restaurant");
 	   

@@ -10,7 +10,7 @@ import com.example.playce.ResultController;
 public class SVResultTest {
 
 	@Test
-	public void testGetPlayceResult1() {
+	public void testCompareResults1() {
 	   Result r1 = new Result("Eureka! San Luis Obispo", 2, 4.4, 
 	       "1141 Chorro St San Luis Obispo CA 93401 USA", 35.2791, -120.662, "restaurant");
 	   
@@ -21,7 +21,7 @@ public class SVResultTest {
 	}
 	
 	@Test
-	public void testGetPlayceResult2() {
+	public void testCompareResults2() {
 	   Result expected = new Result("Koberl At Blue", 2, 4.4, 
 	       "998 Monterey St San Luis Obispo CA 93401 USA", 35.2818, -120.662, "restaurant");
 	   
