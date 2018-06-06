@@ -18,5 +18,5 @@ public class GetPlayceResultTest {
 	       "San Luis Obispo CA 93401 USA",35.2828, -120.66, "recreation");
 	   
 	   Assert.assertTrue(r.generatePlayceResult(playceName).equals(expected));
-	}
+        }
 }
