@@ -1,7 +1,7 @@
 package com.example.playce;
 
 import java.util.*;
-import org.junit.Assert;
+import java.lang.*;
 
 public class Result{
 
@@ -27,11 +27,11 @@ public class Result{
     public boolean isEqualTO(Result r) {
         return (this.name.equals(r.name)
             && this.price == r.price
-            && Assert.assertEquals(this.rating, r.rating)
+            && Math.abs(this.rating - r.rating) < 0.0001
             && this.address.equals(r.address)
             && this.category.equals(r.category)
-            && Assert.assertEquals(this.latitude, r.latitude)
-            && Assert.assertEquals(this.longitude, r.longitude)
+            && Math.abs(this.latitude - r.latitude) < 0.0001
+            && math.abs(this.longitude, r.longitude) < 0.0001
             && this.distance == r.distance);
     }
 
