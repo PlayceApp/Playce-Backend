@@ -27,11 +27,11 @@ public class Result{
     public boolean isEqualTO(Result r) {
         return (this.name.equals(r.name)
             && this.price == r.price
-            && Math.abs(this.rating - r.rating) < 0.0001
+            && this.rating == r.rating
             && this.address.equals(r.address)
             && this.category.equals(r.category)
-            && Math.abs(this.latitude - r.latitude) < 0.0001
-            && math.abs(this.longitude, r.longitude) < 0.0001
+            && this.latitude == r.latitude
+            && this.longitude == r.longitude
             && this.distance == r.distance);
     }
 
