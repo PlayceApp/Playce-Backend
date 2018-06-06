@@ -23,6 +23,6 @@ public class KMResultTest {
 	   Result r = new Result("Raku Ramen", 2, 3.5, 
 	       "1308 Monterey St San Luis Obispo CA 93401", 35.2846, -120.657, "restaurant");
 	   
-	   Assert.assertEquals(r.compare(2), 0);
+	   Assert.assertEquals(r.compare(r), 0);
 	}
 }
