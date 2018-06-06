@@ -15,7 +15,7 @@ public class KMResultTest {
            Result r2 = new Result("Urbane Cafe", 1, 4.5, 
 	       "952 Higuera St San Luis Obispo CA 93401", 35.2809, -120.662, "restaurant");
 	   
-	   Assert.assertEquals(r1.compare(r2), -1);
+	   Assert.assertEquals(r1.compare(r2), 1);
 	}
 	
 	@Test
