@@ -25,6 +25,6 @@ public class SVResultTest {
 	   Result expected = new Result("Koberl At Blue", 2, 4.4, 
 	       "998 Monterey St San Luis Obispo CA 93401 USA", 35.2818, -120.662, "restaurant");
 	   
-	   Assert.assertTrue(r.compare(r)) == 0;
+	   Assert.assertTrue(r.compare(r) == 0);
 	}
 }
