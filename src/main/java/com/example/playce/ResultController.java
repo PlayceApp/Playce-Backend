@@ -164,10 +164,10 @@ public class ResultController {
         }
     }
 
-    public double calculateDistance(double lat1, double long1, double lat2, double long2) {
+    private double calculateDistance(double lat1, double long1, double lat2, double long2) {
 
         int earthRadiusMi = 3959;
-        //function sourced from stack overflow
+        //fGunction sourced from stack overflow
         //it calculates linear distance between two specified coordinates
         double dLat = degreesToRadians(lat2 - lat1);
         double dLon = degreesToRadians(long2 - long1);
@@ -179,7 +179,7 @@ public class ResultController {
         return earthRadiusMi * c;
     }
 
-    public static double degreesToRadians(double degrees) {
+    private static double degreesToRadians(double degrees) {
         return degrees * Math.PI / 180;
     }
 
