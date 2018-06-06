@@ -15,7 +15,7 @@ public class SVResultControllerTest {
 	   String playceName = "Eureka! San Luis Obispo";
 	   
 	   Result expected = new Result("Eureka! San Luis Obispo", 2, 4.4, 
-	       "1141 Chorro St San Luis Obispo CA 93401", 35.2791, -120.662, "restaurant");
+	       "1141 Chorro St San Luis Obispo CA 93401 USA", 35.2791, -120.662, "restaurant");
 	   
 	   Assert.assertTrue(r.generatePlayceResult(playceName).isEqualTo(expected));
 	}
@@ -26,7 +26,7 @@ public class SVResultControllerTest {
 	   String playceName = "Koberl At Blue";
    
 	   Result expected = new Result("Koberl At Blue", 2, 4.4, 
-	       "998 Monterey St San Luis Obispo CA 93401", 35.2818, -120.662, "restaurant");
+	       "998 Monterey St San Luis Obispo CA 93401 USA", 35.2818, -120.662, "restaurant");
 	   
 	   Assert.assertTrue(r.generatePlayceResult(playceName).isEqualTo(expected));
 	}
