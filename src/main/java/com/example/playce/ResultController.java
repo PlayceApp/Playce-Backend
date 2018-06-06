@@ -164,10 +164,6 @@ public class ResultController {
         }
     }
 
-    private static double degreesToRadians(double degrees) {
-        return degrees * Math.PI / 180;
-    }
-
     private String createQuery(ArrayList < String > colNames, ArrayList < String > colValues) {
         StringBuilder query = new StringBuilder();
         for (int i = 0; i < colNames.size(); i++) {
